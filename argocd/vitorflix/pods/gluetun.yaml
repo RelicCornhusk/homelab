@@ -6,45 +6,6 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    com.docker.official-images.bashbrew.arch/media-servicesjelly-qbit-toggle1: amd64
-    io.kubernetes.cri-o.ContainerType/gluetun-container: container
-    io.kubernetes.cri-o.ContainerType/gluetun-qbittorrent-port-manager: container
-    io.kubernetes.cri-o.ContainerType/media-servicesjelly-qbit-toggle1: container
-    io.kubernetes.cri-o.ContainerType/qbittorrent: container
-    io.kubernetes.cri-o.SandboxID/gluetun-container: 2a7b12f1c98d365cbf3915e94dc427bd04eed0a3a8f0b1a0c4b3225d8769065
-    io.kubernetes.cri-o.SandboxID/gluetun-qbittorrent-port-manager: 2a7b12f1c98d365cbf3915e94dc427bd04eed0a3a8f0b1a0c4b3225d8769065
-    io.kubernetes.cri-o.SandboxID/media-servicesjelly-qbit-toggle1: 2a7b12f1c98d365cbf3915e94dc427bd04eed0a3a8f0b1a0c4b3225d8769065
-    io.kubernetes.cri-o.SandboxID/qbittorrent: 2a7b12f1c98d365cbf3915e94dc427bd04eed0a3a8f0b1a0c4b3225d8769065
-    io.kubernetes.cri-o.TTY/gluetun-container: "false"
-    io.kubernetes.cri-o.TTY/gluetun-qbittorrent-port-manager: "false"
-    io.kubernetes.cri-o.TTY/media-servicesjelly-qbit-toggle1: "false"
-    io.kubernetes.cri-o.TTY/qbittorrent: "false"
-    io.podman.annotations.autoremove/gluetun-container: "FALSE"
-    io.podman.annotations.autoremove/gluetun-qbittorrent-port-manager: "FALSE"
-    io.podman.annotations.autoremove/media-servicesjelly-qbit-toggle1: "FALSE"
-    io.podman.annotations.autoremove/qbittorrent: "FALSE"
-    io.podman.annotations.init/gluetun-container: "FALSE"
-    io.podman.annotations.init/gluetun-qbittorrent-port-manager: "FALSE"
-    io.podman.annotations.init/media-servicesjelly-qbit-toggle1: "FALSE"
-    io.podman.annotations.init/qbittorrent: "FALSE"
-    io.podman.annotations.privileged/gluetun-container: "TRUE"
-    io.podman.annotations.privileged/gluetun-qbittorrent-port-manager: "FALSE"
-    io.podman.annotations.privileged/media-servicesjelly-qbit-toggle1: "FALSE"
-    io.podman.annotations.privileged/qbittorrent: "FALSE"
-    io.podman.annotations.publish-all/gluetun-container: "FALSE"
-    io.podman.annotations.publish-all/gluetun-qbittorrent-port-manager: "FALSE"
-    io.podman.annotations.publish-all/media-servicesjelly-qbit-toggle1: "FALSE"
-    io.podman.annotations.publish-all/qbittorrent: "FALSE"
-    org.opencontainers.image.base.digest/gluetun-qbittorrent-port-manager: sha256:bb89f137c6111ede52c3974d59f60ac2a8e2df4580e4905958031240
-    org.opencontainers.image.base.digest/media-servicesjelly-qbit-toggle1: sha256:6d4ad45d5ee9229245c81694752a142576823d7163afd7267d249c95
-    org.opencontainers.image.base.name/gluetun-qbittorrent-port-manager: docker.io/library/alpine:latest
-    org.opencontainers.image.base.name/media-servicesjelly-qbit-toggle1: docker.io/library/python:3
-    org.opencontainers.image.created/media-servicesjelly-qbit-toggle1: "2024-08-07T15:49:22Z"
-    org.opencontainers.image.revision/media-servicesjelly-qbit-toggle1: cc2cf19f2c9a440706d17b5937bf104052eef967
-    org.opencontainers.image.source/media-servicesjelly-qbit-toggle1: https://github.com/docker-library/python.git#cc2cf19f2c9a440706
-    org.opencontainers.image.url/media-servicesjelly-qbit-toggle1: https://hub.docker.com/_/python
-    org.opencontainers.image.version/media-servicesjelly-qbit-toggle1: 3.12.5-bookworm
-  creationTimestamp: "2024-08-17T00:52:06Z"
   labels:
     app: gluetun
   name: gluetun
@@ -100,7 +61,7 @@ spec:
     - mountPath: /gluetun
       name: docker-appdata-gluetun-host-0
     - mountPath: /tmp/gluetun
-      name: docker-appdata-gluetun_tmp-host-1
+      name: docker-appdata-gluetun-tmp-host-1
   - env:
     - name: DOCKER_MODS
       value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
@@ -136,7 +97,7 @@ spec:
         - CAP_AUDIT_WRITE
     volumeMounts:
     - mountPath: /tmp/gluetun
-      name: docker-appdata-gluetun_tmp-host-0
+      name: docker-appdata-gluetun-tmp-host-0
     - mountPath: /qbit-healthcheck.sh
       name: home-podman-docker-projects-media-services-qbit-healthcheck.sh-host-1
   - env:

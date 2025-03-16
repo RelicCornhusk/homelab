@@ -43,9 +43,6 @@ spec:
         - CAP_NET_RAW
         - CAP_AUDIT_WRITE
     volumeMounts:
-    - mountPath: /etc/localtime
-      name: usr-share-zoneinfo-America-Toronto-host-0
-      readOnly: true
     - mountPath: /config
       name: docker-appdata-radarr-host-1
     - mountPath: /data

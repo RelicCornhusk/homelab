@@ -45,9 +45,6 @@ spec:
     volumeMounts:
     - mountPath: /data
       name: data-host-0
-    - mountPath: /etc/localtime
-      name: usr-share-zoneinfo-America-Toronto-host-1
-      readOnly: true
     - mountPath: /config
       name: docker-appdata-bazarr-host-2
   - args:
