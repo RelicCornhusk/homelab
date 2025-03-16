@@ -14,7 +14,6 @@ spec:
   automountServiceAccountToken: false
   containers:
   - image: localhost/jelly-qbit-toggle:latest
-    restartPolicy: Always
     name: media-servicesjelly-qbit-toggle1
     ports:
     - containerPort: 5000
@@ -53,7 +52,6 @@ spec:
       value: "on"
     image: docker.io/qmcgaw/gluetun:latest
     name: gluetun-container
-    restartPolicy: Always
     resources: {}
     securityContext:
       privileged: true
@@ -73,7 +71,6 @@ spec:
       value: "1"
     image: lscr.io/linuxserver/qbittorrent:5.0.3 ## using this version for qbit_manage compatibility
     name: qbittorrent
-    restartPolicy: Always
     resources: {}
     securityContext:
       capabilities:
@@ -99,7 +96,7 @@ spec:
     - mountPath: /tmp/gluetun
       name: docker-appdata-gluetun-tmp-host-0
     - mountPath: /qbit-healthcheck.sh
-      name: home-podman-docker-projects-media-services-qbit-healthcheck.sh-host-1
+      name: qbit-healthcheck-sh-host-1
   - env:
     - name: QBT_TAG_UPDATE
       value: "false"
@@ -145,12 +142,11 @@ spec:
         - CAP_AUDIT_WRITE
     volumeMounts:
     - mountPath: /config
-      name: docker-appdata-qbit_manage-host-0
+      name: docker-appdata-qbit-manage-host-0
     - mountPath: /data
       name: data-host-1
   enableServiceLinks: false
   hostname: gluetun
-  restartPolicy: Always
   volumes:
   - hostPath:
       path: /docker/appdata/gluetun-tmp
@@ -159,7 +155,7 @@ spec:
   - hostPath:
       path: /home/podman/docker-projects/media-services/qbit-healthcheck.sh
       type: Directory
-    name: home-podman-docker-projects-media-services-qbit-healthcheck.sh-host-1
+    name: qbit-healthcheck-sh-host-1
   - hostPath:
       path: /docker/appdata/gluetun
       type: Directory
