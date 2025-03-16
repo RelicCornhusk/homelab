@@ -1,0 +1,66 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-4.3.1
+
+# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
+# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
+# has the right permissions to access the volumes added.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    io.containers.autoupdate : "registry"
+    io.kubernetes.cri-o.TTY/jellyfin: "false"
+    io.podman.annotations.autoremove/jellyfin: "FALSE"
+    io.podman.annotations.init/jellyfin: "FALSE"
+    io.podman.annotations.privileged/jellyfin: "FALSE"
+    io.podman.annotations.publish-all/jellyfin: "FALSE"
+  creationTimestamp: "2024-08-11T14:01:24Z"
+  labels:
+    app: jellyfin
+  name: jellyfin
+spec:
+  restartPolicy: Always
+  automountServiceAccountToken: false
+  containers:
+  - env:
+    - name: JELLYFIN_PublishedServerUrl
+      value: "192.168.8.18"
+    - name: PUID
+      value: "1"
+    - name: PGID
+      value: "1"
+    image: lscr.io/linuxserver/jellyfin:latest
+    name: jellyfin
+    ports:
+    - containerPort: 8096
+      hostPort: 8096
+    - containerPort: 1900
+      hostPort: 1900
+      protocol: UDP
+    - containerPort: 7359
+      hostPort: 7359
+      protocol: UDP
+    securityContext:
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+    volumeMounts:
+    - mountPath: /data
+      name: data-host-0
+    - mountPath: /config
+      name: docker-appdata-jellyfin-host-1
+  enableServiceLinks: false
+  volumes:
+  - hostPath:
+      path: /data
+      type: Directory
+    name: data-host-0
+  - hostPath:
+      path: /docker/appdata/jellyfin
+      type: Directory
+    name: docker-appdata-jellyfin-host-1

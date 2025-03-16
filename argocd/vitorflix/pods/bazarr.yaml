@@ -1,0 +1,89 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-4.3.1
+
+# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
+# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
+# has the right permissions to access the volumes added.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    io.containers.autoupdate : "registry"
+    io.kubernetes.cri-o.TTY/bazarr: "false"
+    io.podman.annotations.autoremove/bazarr: "FALSE"
+    io.podman.annotations.init/bazarr: "FALSE"
+    io.podman.annotations.privileged/bazarr: "FALSE"
+    io.podman.annotations.publish-all/bazarr: "FALSE"
+  creationTimestamp: "2024-12-24T19:20:57Z"
+  labels:
+    app: bazarr
+  name: bazarr
+spec:
+  automountServiceAccountToken: false
+  restartPolicy: Always
+  containers:
+  - env:
+    - name: PUID
+      value: "1"
+    - name: PGID
+      value: "1"
+    image: ghcr.io/hotio/bazarr:latest
+    name: bazarr
+    ports:
+    - containerPort: 6767
+      hostPort: 6767
+    securityContext:
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+    volumeMounts:
+    - mountPath: /data
+      name: data-host-0
+    - mountPath: /etc/localtime
+      name: usr-share-zoneinfo-America-Toronto-host-1
+      readOnly: true
+    - mountPath: /config
+      name: docker-appdata-bazarr-host-2
+  - args:
+    - /usr/local/bin/python
+    - -u
+    - /app/flaresolverr.py
+    env:
+    - name: LOG_HTML
+      value: "false"
+    - name: CAPTCHA_SOLVER
+      value: none
+    - name: TZ
+      value: America/Toronto
+    - name: LOG_LEVEL
+      value: info
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    name: flaresolverr
+    ports:
+    - containerPort: 8191
+      hostPort: 8191
+    securityContext:
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+  enableServiceLinks: false
+  volumes:
+  - hostPath:
+      path: /data
+      type: Directory
+    name: data-host-0
+  - hostPath:
+      path: /usr/share/zoneinfo/America/Toronto
+      type: File
+    name: usr-share-zoneinfo-America-Toronto-host-1
+  - hostPath:
+      path: /docker/appdata/bazarr
+      type: Directory
+    name: docker-appdata-bazarr-host-2

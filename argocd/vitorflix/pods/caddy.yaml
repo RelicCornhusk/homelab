@@ -1,0 +1,81 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-4.3.1
+
+# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
+# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
+# has the right permissions to access the volumes added.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    io.containers.autoupdate : "registry"
+    com.docker.official-images.bashbrew.arch/caddy: amd64
+    io.kubernetes.cri-o.TTY/caddy: "false"
+    io.podman.annotations.autoremove/caddy: "FALSE"
+    io.podman.annotations.init/caddy: "FALSE"
+    io.podman.annotations.privileged/caddy: "FALSE"
+    io.podman.annotations.publish-all/caddy: "FALSE"
+    org.opencontainers.image.base.digest/caddy: sha256:a2b4d9dfe54c4597ea05d362270b3986f98ca36642feb6068e5d7096
+    org.opencontainers.image.base.name/caddy: docker.io/library/caddy:latest
+    org.opencontainers.image.created/caddy: "2024-06-04T22:12:59Z"
+    org.opencontainers.image.revision/caddy: 645721b4b87b6c3a692641213853ce064eb82fe2
+    org.opencontainers.image.source/caddy: https://github.com/caddyserver/caddy-docker.git#645721b4b87b6c3
+    org.opencontainers.image.url/caddy: https://hub.docker.com/_/caddy
+    org.opencontainers.image.version/caddy: 2.8.4-alpine
+  creationTimestamp: "2024-12-24T19:24:42Z"
+  labels:
+    app: caddy
+  name: caddy
+spec:
+  restartPolicy: Always
+  automountServiceAccountToken: false
+  containers:
+  - env:
+    - name: porkbun_api_password
+      valueFrom:
+        secretKeyRef:
+          name: PORKBUN_API_PASSWORD
+          key: porkbun_api_password
+    - name: porkbun_api_key
+      valueFrom:
+        secretKeyRef:
+          name: PORKBUN_API_KEY
+          key: porkbun_api_key
+    image: localhost/caddy:latest
+    name: caddy
+    ports:
+    - containerPort: 80
+      hostPort: 80
+    - containerPort: 443
+      hostPort: 443
+    - containerPort: 443
+      hostPort: 443
+      protocol: UDP
+    securityContext:
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+    volumeMounts:
+    - mountPath: /etc/caddy/Caddyfile
+      name: home-podman-podman-projects-network-services-Caddyfile-host-0
+    - mountPath: /data
+      name: caddy_data-pvc
+    - mountPath: /config
+      name: caddy_config-pvc
+  enableServiceLinks: false
+  volumes:
+  - hostPath:
+      path: /home/podman/podman-projects/network-services/Caddyfile
+      type: File
+    name: home-podman-podman-projects-network-services-Caddyfile-host-0
+  - name: caddy_data-pvc
+    persistentVolumeClaim:
+      claimName: caddy_data
+  - name: caddy_config-pvc
+    persistentVolumeClaim:
+      claimName: caddy_config

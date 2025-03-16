@@ -1,0 +1,52 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-4.3.1
+
+# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
+# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
+# has the right permissions to access the volumes added.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    io.containers.autoupdate : "registry"
+    io.kubernetes.cri-o.TTY/prowlarr: "false"
+    io.podman.annotations.autoremove/prowlarr: "FALSE"
+    io.podman.annotations.init/prowlarr: "FALSE"
+    io.podman.annotations.privileged/prowlarr: "FALSE"
+    io.podman.annotations.publish-all/prowlarr: "FALSE"
+  creationTimestamp: "2024-12-24T19:21:15Z"
+  labels:
+    app: prowlarr
+  name: prowlarr
+spec:
+  restartPolicy: Always
+  automountServiceAccountToken: false
+  containers:
+  - env:
+    - name: PUID
+      value: "1"
+    - name: PGID
+      value: "1"
+    image: lscr.io/linuxserver/prowlarr:develop
+    name: prowlarr
+    ports:
+    - containerPort: 9696
+      hostPort: 9696
+    securityContext:
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+    volumeMounts:
+    - mountPath: /config
+      name: docker-appdata-prowlarr-host-0
+  enableServiceLinks: false
+  volumes:
+  - hostPath:
+      path: /docker/appdata/prowlarr
+      type: Directory
+    name: docker-appdata-prowlarr-host-0
