@@ -10,6 +10,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  namespace: vitorflix
   annotations:
     io.containers.autoupdate : "registry"
     io.kubernetes.cri-o.TTY/bazarr: "false"
