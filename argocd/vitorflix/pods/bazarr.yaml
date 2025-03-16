@@ -20,7 +20,6 @@ metadata:
   creationTimestamp: "2024-12-24T19:20:57Z"
   labels:
     app: bazarr
-    pod-security.kubernetes.io/enforce: privileged
   name: bazarr
 spec:
   automountServiceAccountToken: false

@@ -20,7 +20,6 @@ metadata:
   creationTimestamp: "2024-12-24T19:25:45Z"
   labels:
     app: jellyseerr
-    pod-security.kubernetes.io/enforce: privileged
   name: jellyseerr
 spec:
   restartPolicy: Always

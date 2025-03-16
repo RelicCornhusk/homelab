@@ -20,7 +20,6 @@ metadata:
   creationTimestamp: "2024-08-11T14:01:24Z"
   labels:
     app: jellyfin
-    pod-security.kubernetes.io/enforce: privileged
   name: jellyfin
 spec:
   restartPolicy: Always

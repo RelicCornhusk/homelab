@@ -47,7 +47,6 @@ metadata:
   creationTimestamp: "2024-08-17T00:52:06Z"
   labels:
     app: gluetun
-    pod-security.kubernetes.io/enforce: privileged
   name: gluetun
 spec:
   automountServiceAccountToken: false

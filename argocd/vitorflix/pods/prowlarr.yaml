@@ -20,7 +20,6 @@ metadata:
   creationTimestamp: "2024-12-24T19:21:15Z"
   labels:
     app: prowlarr
-    pod-security.kubernetes.io/enforce: privileged
   name: prowlarr
 spec:
   restartPolicy: Always

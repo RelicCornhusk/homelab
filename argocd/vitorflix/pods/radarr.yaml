@@ -20,7 +20,6 @@ metadata:
   creationTimestamp: "2024-12-24T19:19:15Z"
   labels:
     app: radarr
-    pod-security.kubernetes.io/enforce: privileged
   name: radarr
 spec:
   restartPolicy: Always
