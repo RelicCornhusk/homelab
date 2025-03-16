@@ -26,6 +26,7 @@ metadata:
     org.opencontainers.image.url/caddy: https://hub.docker.com/_/caddy
     org.opencontainers.image.version/caddy: 2.8.4-alpine
   creationTimestamp: "2024-12-24T19:24:42Z"
+  namespace: vitorflix
   labels:
     app: caddy
   name: caddy

@@ -18,6 +18,7 @@ metadata:
     io.podman.annotations.privileged/prowlarr: "FALSE"
     io.podman.annotations.publish-all/prowlarr: "FALSE"
   creationTimestamp: "2024-12-24T19:21:15Z"
+  namespace: vitorflix
   labels:
     app: prowlarr
   name: prowlarr

@@ -48,6 +48,7 @@ metadata:
   labels:
     app: gluetun
   name: gluetun
+  namespace: vitorflix
 spec:
   automountServiceAccountToken: false
   containers:

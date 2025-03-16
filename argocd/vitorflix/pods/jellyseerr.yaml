@@ -21,6 +21,7 @@ metadata:
   labels:
     app: jellyseerr
   name: jellyseerr
+  namespace: vitorflix
 spec:
   restartPolicy: Always
   automountServiceAccountToken: false

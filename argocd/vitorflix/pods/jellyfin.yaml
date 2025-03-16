@@ -21,6 +21,7 @@ metadata:
   labels:
     app: jellyfin
   name: jellyfin
+  namespace: vitorflix
 spec:
   restartPolicy: Always
   automountServiceAccountToken: false

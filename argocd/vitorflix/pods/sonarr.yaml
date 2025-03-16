@@ -11,13 +11,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    io.containers.autoupdate : "registry"
-    io.kubernetes.cri-o.TTY/sonarr: "false"
-    io.podman.annotations.autoremove/sonarr: "FALSE"
-    io.podman.annotations.init/sonarr: "FALSE"
-    io.podman.annotations.privileged/sonarr: "FALSE"
-    io.podman.annotations.publish-all/sonarr: "FALSE"
-  creationTimestamp: "2024-12-24T19:20:04Z"
+  namespace: vitorflix
   labels:
     app: sonarr
   name: sonarr

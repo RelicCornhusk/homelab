@@ -18,6 +18,7 @@ metadata:
     io.podman.annotations.privileged/radarr: "FALSE"
     io.podman.annotations.publish-all/radarr: "FALSE"
   creationTimestamp: "2024-12-24T19:19:15Z"
+  namespace: vitorflix
   labels:
     app: radarr
   name: radarr
