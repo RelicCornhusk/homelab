@@ -20,6 +20,7 @@ metadata:
   creationTimestamp: "2024-12-24T19:20:57Z"
   labels:
     app: bazarr
+    pod-security.kubernetes.io/enforce: privileged
   name: bazarr
 spec:
   automountServiceAccountToken: false
@@ -79,10 +80,6 @@ spec:
       path: /data
       type: Directory
     name: data-host-0
-  - hostPath:
-      path: /usr/share/zoneinfo/America/Toronto
-      type: File
-    name: usr-share-zoneinfo-America-Toronto-host-1
   - hostPath:
       path: /docker/appdata/bazarr
       type: Directory

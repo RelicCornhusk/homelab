@@ -19,6 +19,7 @@ metadata:
     io.podman.annotations.publish-all/sonarr: "FALSE"
   creationTimestamp: "2024-12-24T19:20:04Z"
   labels:
+    pod-security.kubernetes.io/enforce: privileged
     app: sonarr
   name: sonarr
 spec:
@@ -51,10 +52,6 @@ spec:
       name: data-host-2
   enableServiceLinks: false
   volumes:
-  - hostPath:
-      path: /usr/share/zoneinfo/America/Toronto
-      type: File
-    name: usr-share-zoneinfo-America-Toronto-host-0
   - hostPath:
       path: /docker/appdata/sonarr
       type: Directory

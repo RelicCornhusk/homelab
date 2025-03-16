@@ -20,6 +20,7 @@ metadata:
   creationTimestamp: "2024-12-24T19:19:15Z"
   labels:
     app: radarr
+    pod-security.kubernetes.io/enforce: privileged
   name: radarr
 spec:
   restartPolicy: Always
@@ -51,10 +52,6 @@ spec:
       name: data-host-2
   enableServiceLinks: false
   volumes:
-  - hostPath:
-      path: /usr/share/zoneinfo/America/Toronto
-      type: File
-    name: usr-share-zoneinfo-America-Toronto-host-0
   - hostPath:
       path: /docker/appdata/radarr
       type: Directory

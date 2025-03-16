@@ -47,6 +47,7 @@ metadata:
   creationTimestamp: "2024-08-17T00:52:06Z"
   labels:
     app: gluetun
+    pod-security.kubernetes.io/enforce: privileged
   name: gluetun
 spec:
   automountServiceAccountToken: false
@@ -191,9 +192,9 @@ spec:
   restartPolicy: Always
   volumes:
   - hostPath:
-      path: /docker/appdata/gluetun_tmp
+      path: /docker/appdata/gluetun-tmp
       type: Directory
-    name: docker-appdata-gluetun_tmp-host-0
+    name: docker-appdata-gluetun-tmp-host-0
   - hostPath:
       path: /home/podman/docker-projects/media-services/qbit-healthcheck.sh
       type: Directory
@@ -203,17 +204,17 @@ spec:
       type: Directory
     name: docker-appdata-gluetun-host-0
   - hostPath:
-      path: /docker/appdata/gluetun_tmp
+      path: /docker/appdata/gluetun-tmp
       type: Directory
-    name: docker-appdata-gluetun_tmp-host-1
+    name: docker-appdata-gluetun-tmp-host-1
   - hostPath:
       path: /docker/appdata/qbittorrent
       type: Directory
     name: docker-appdata-qbittorrent-host-0
   - hostPath:
-      path: /docker/appdata/qbit_manage
+      path: /docker/appdata/qbit-manage
       type: Directory
-    name: docker-appdata-qbit_manage-host-0
+    name: docker-appdata-qbit-manage-host-0
   - hostPath:
       path: /data
       type: Directory

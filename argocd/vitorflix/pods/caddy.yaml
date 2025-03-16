@@ -27,6 +27,7 @@ metadata:
     org.opencontainers.image.version/caddy: 2.8.4-alpine
   creationTimestamp: "2024-12-24T19:24:42Z"
   labels:
+    pod-security.kubernetes.io/enforce: privileged
     app: caddy
   name: caddy
 spec:
