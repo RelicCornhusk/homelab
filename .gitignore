@@ -1,1 +1,6 @@
 **/secrets
+**/certificate
+**/.terraform
+terraform.tfstate
+output
+proxmox.auto.tfvars
