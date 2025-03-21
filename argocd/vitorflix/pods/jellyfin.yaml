@@ -27,8 +27,8 @@ spec:
   automountServiceAccountToken: false
   containers:
   - env:
-    - name: JELLYFIN_PublishedServerUrl
-      value: "192.168.8.18"
+    # - name: JELLYFIN_PublishedServerUrl
+    #   value: "192.168.8.18"
     - name: PUID
       value: "1"
     - name: PGID
