@@ -2,8 +2,12 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: proxmox-csi
-provisioner: csi.proxmox.sinextra.dev
 parameters:
-  cache: writethrough
   csi.storage.k8s.io/fstype: ext4
   storage: local-btrfs
+  cache: writethrough
+  ssd: "true"
+provisioner: csi.proxmox.sinextra.dev
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
