@@ -4,6 +4,6 @@ metadata:
   creationTimestamp: null
   name: vitorflix
   labels:
-    pod-security.kubernetes.io/enforce: privileged
+    # pod-security.kubernetes.io/enforce: privileged
 spec: {}
 status: {}

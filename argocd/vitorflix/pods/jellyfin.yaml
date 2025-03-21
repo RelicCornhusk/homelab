@@ -52,16 +52,14 @@ spec:
         - CAP_AUDIT_WRITE
     volumeMounts:
     - mountPath: /data
-      name: data-host-0
+      name: data
     - mountPath: /config
-      name: docker-appdata-jellyfin-host-1
+      name: appdata
   enableServiceLinks: false
   volumes:
-  - hostPath:
-      path: /data
-      type: Directory
-    name: data-host-0
-  - hostPath:
-      path: /docker/appdata/jellyfin
-      type: Directory
-    name: docker-appdata-jellyfin-host-1
+  - persistentVolumeClaim:
+      claimName: data
+    name: data
+  - persistentVolumeClaim:
+      claimName: appdata
+    name: appdata
