@@ -1,0 +1,13 @@
+project: default
+source:
+  repoURL: https://github.com/RelicCornhusk/homelab.git
+  path: argocd/vitorflix
+  targetRevision: HEAD
+  directory:
+    recurse: true
+    jsonnet: {}
+destination:
+  server: https://kubernetes.default.svc
+  namespace: argocd
+syncPolicy:
+  automated: {}
