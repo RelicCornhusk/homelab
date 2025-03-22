@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: jellyfin
+  name: jellyfin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: jellyfin
+    spec:
+      containers:
+      - image: lscr.io/linuxserver/jellyfin:latest
+        name: jellyfin
+        resources: {}
+        volumeMounts:
+        - mountPath: /data
+          name: data
+        - mountPath: /config
+          name: appdata
+      volumes:
+      - persistentVolumeClaim:
+          claimName: data
+        name: data
+      - persistentVolumeClaim:
+          claimName: appdata
+        name: appdata
+
+status: {}
