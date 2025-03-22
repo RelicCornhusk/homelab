@@ -18,18 +18,18 @@ module "proxmox-volume" {
   }
 }
 
-module "persistent-volume" {
-  for_each = var.volumes
-  source   = "./persistent-volume"
+# module "persistent-volume" {
+#   for_each = var.volumes
+#   source   = "./persistent-volume"
 
-  providers = {
-    kubernetes = kubernetes
-  }
+#   providers = {
+#     kubernetes = kubernetes
+#   }
 
-  volume = {
-    name          = each.key
-    capacity      = each.value.size
-    volume_handle = "${var.proxmox_api.cluster_name}/${module.proxmox-volume[each.key].node}/${module.proxmox-volume[each.key].storage}/${module.proxmox-volume[each.key].filename}"
-    storage       = each.value.storage
-  }
-}
+#   volume = {
+#     name          = each.key
+#     capacity      = each.value.size
+#     volume_handle = "${var.proxmox_api.cluster_name}/${module.proxmox-volume[each.key].node}/${module.proxmox-volume[each.key].storage}/${module.proxmox-volume[each.key].filename}"
+#     storage       = each.value.storage
+#   }
+# }
