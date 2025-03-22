@@ -12,6 +12,23 @@ spec:
     targetRevision: HEAD
   sources: []
   project: default
+  ignoreDifferences:
+    - group: ""
+      kind: ConfigMap
+      jsonPointers:
+        - /metadata/annotations/helm.sh~1resource-policy
+    - group: ""
+      kind: Secret
+      jsonPointers:
+        - /metadata/annotations/helm.sh~1resource-policy
+    - group: ""
+      kind: ServiceAccount
+      jsonPointers:
+        - /metadata/annotations/meta.helm.sh~1release-name
+    - group: "apps"
+      kind: Deployment
+      jsonPointers:
+        - /metadata/annotations/meta.helm.sh~1release-name
   syncPolicy:
     automated:
       prune: false
