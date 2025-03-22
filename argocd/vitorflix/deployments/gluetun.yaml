@@ -57,12 +57,12 @@ spec:
         - name: OPENVPN_USER
           valueFrom:
             secretKeyRef:
-              name: openvpn-oauth
+              name: openvpn-auth
               key: openvpn-user 
         - name: OPENVPN_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: openvpn-oauth
+              name: openvpn-auth
               key: openvpn-password
         image: docker.io/qmcgaw/gluetun:latest
         name: gluetun-container
