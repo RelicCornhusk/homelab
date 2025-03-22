@@ -3,8 +3,10 @@ kind: Connector
 metadata:
   name: ts-pod-cidrs
   namespace: tailscale
+  annotations:
+    argocd.argoproj.io/sync-wave: "2" 
 spec:
-  hostname: ts-pod-cidrs
+  hostname: ts-pod-service-cidrs
   subnetRouter:
     advertiseRoutes:
       - "10.96.0.0/12"
