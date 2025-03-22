@@ -33,5 +33,5 @@ spec:
         name: data
       - persistentVolumeClaim:
           claimName: config-jellyfin
-        name: config
+        name: config-jellyfin
 status: {}
