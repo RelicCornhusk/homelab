@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: jellyfin
-  name: jellyfin
+  name: jellyfin-unique
   namespace: vitorflix
 spec:
   replicas: 1
