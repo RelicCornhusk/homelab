@@ -78,6 +78,8 @@ spec:
           - --version=v1.16.0
           - --set
           - kubeProxyReplacement=true
+          - --set
+          - socketLB.hostNamespaceOnly=true
           - --values
           - /root/app/values.yaml
       volumes:
