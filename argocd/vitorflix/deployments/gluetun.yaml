@@ -73,7 +73,7 @@ spec:
         - mountPath: /gluetun
           name: config-gluetun
         - mountPath: /tmp/gluetun
-          name: config-gluetun-tmp
+          name: config-gluetun
       - env:
         - name: DOCKER_MODS
           value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
@@ -171,9 +171,6 @@ spec:
       - persistentVolumeClaim:
           claimName: config-gluetun
         name: config-gluetun
-      - persistentVolumeClaim:
-          claimName: config-gluetun-tmp
-        name: config-gluetun-tmp
       # - hostPath:
       #     path: /docker/config/gluetun-tmp
       #     type: Directory
