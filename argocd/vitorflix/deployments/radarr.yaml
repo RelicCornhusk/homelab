@@ -3,35 +3,35 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: jellyfin
-  name: jellyfin
+    app: radarr
+  name: radarr
   namespace: vitorflix
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jellyfin
+      app: radarr
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: jellyfin
+        app: radarr
     spec:
       containers:
-      - image: lscr.io/linuxserver/jellyfin:latest
-        name: jellyfin
+      - image: lscr.io/linuxserver/radarr:latest
+        name: radarr
         resources: {}
         volumeMounts:
         - mountPath: /data
           name: data
         - mountPath: /config
-          name: config-jellyfin
+          name: config-radarr
       volumes:
       - persistentVolumeClaim:
           claimName: data
         name: data
       - persistentVolumeClaim:
-          claimName: config-jellyfin
-        name: config
+          claimName: config-radarr
+        name: config-radarr
 status: {}
