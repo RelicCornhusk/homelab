@@ -11,13 +11,6 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    io.containers.autoupdate : "registry"
-    io.kubernetes.cri-o.TTY/jellyfin: "false"
-    io.podman.annotations.autoremove/jellyfin: "FALSE"
-    io.podman.annotations.init/jellyfin: "FALSE"
-    io.podman.annotations.privileged/jellyfin: "FALSE"
-    io.podman.annotations.publish-all/jellyfin: "FALSE"
-  creationTimestamp: "2024-08-11T14:01:24Z"
   labels:
     app: jellyfin
   name: jellyfin
@@ -29,21 +22,8 @@ spec:
   - env:
     # - name: JELLYFIN_PublishedServerUrl
     #   value: "192.168.8.18"
-    - name: PUID
-      value: "1"
-    - name: PGID
-      value: "1"
     image: lscr.io/linuxserver/jellyfin:latest
     name: jellyfin
-    ports:
-    - containerPort: 8096
-      hostPort: 8096
-    - containerPort: 1900
-      hostPort: 1900
-      protocol: UDP
-    - containerPort: 7359
-      hostPort: 7359
-      protocol: UDP
     securityContext:
       capabilities:
         drop:
