@@ -5,6 +5,7 @@ metadata:
   namespace: tailscale
 spec:
   hostname: ts-pod-cidrs
-  advertiseRoutes:
+  subnetRouter:
+    advertiseRoutes:
       - "10.96.0.0/12"
       - "10.244.0.0/16"
