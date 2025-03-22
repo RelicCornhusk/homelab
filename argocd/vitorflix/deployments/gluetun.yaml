@@ -54,6 +54,16 @@ spec:
           value: "on"
         - name: VPN_PORT_FORWARDING
           value: "on"
+        - name: OPENVPN_USER
+          valueFrom:
+            secretKeyRef:
+              name: openvpn-oauth
+              value: openvpn_user 
+        - name: OPENVPN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: openvpn-oauth
+              value: openvpn_password
         image: docker.io/qmcgaw/gluetun:latest
         name: gluetun-container
         resources: {}
@@ -69,10 +79,10 @@ spec:
           value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
         - name: WEBUI_PORT
           value: "8080"
-        - name: PUID
-          value: "1"
-        - name: PGID
-          value: "1"
+        # - name: PUID
+        #   value: "1"
+        # - name: PGID
+        #   value: "1"
         image: lscr.io/linuxserver/qbittorrent:5.0.3 ## using this version for qbit_manage compatibility
         name: qbittorrent
         resources: {}
