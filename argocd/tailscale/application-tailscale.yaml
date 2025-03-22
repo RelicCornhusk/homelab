@@ -1,7 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tailscale
+  name: tailscale-operator
+  namespace:argocd
 spec:
   destination:
     namespace: tailscale
