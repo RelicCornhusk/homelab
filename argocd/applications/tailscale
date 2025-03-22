@@ -4,13 +4,12 @@ metadata:
   name: tailscale
 spec:
   destination:
-    namespace: tailscale
+    namespace: argocd
     server: https://kubernetes.default.svc
   source:
-    path: ''
-    repoURL: https://pkgs.tailscale.com/helmcharts
-    targetRevision: 1.80.3
-    chart: tailscale-operator
+    path: argocd/tailscale
+    repoURL: https://github.com/RelicCornhusk/homelab.git
+    targetRevision: HEAD
   sources: []
   project: default
   syncPolicy:
