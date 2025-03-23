@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: gluetun-qbittorrent
-  name: gluetun-qbittorrent
+    app: qbittorrent
+  name: qbittorrent
   namespace: vitorflix
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gluetun-qbittorrent
+      app: qbittorrent
   strategy: {}
   template:
     metadata:
       labels:
-        app: gluetun-qbittorrent
+        app: qbittorrent
     spec:
       containers:
       # - image: localhost/jelly-qbit-toggle:latest
@@ -76,7 +76,8 @@ spec:
           name: config-gluetun
         - mountPath: /tmp/gluetun
           name: config-gluetun
-      - env:
+      - name: qbittorrent
+        env:
         # - name: DOCKER_MODS
         #   value: ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
         - name: WEBUI_PORT
@@ -86,7 +87,6 @@ spec:
         # - name: PGID
         #   value: "1"
         image: lscr.io/linuxserver/qbittorrent:5.0.3 ## using this version for qbit_manage compatibility
-        name: qbittorrent
         resources: {}
         ports:
         - containerPort: 8080
@@ -101,8 +101,8 @@ spec:
           name: config-qbittorrent
         - mountPath: /data
           name: data
-      # - image: patrickaclark/gluetun-qbittorrent-port-manager:latest
-      #   name: gluetun-qbittorrent-port-manager
+      # - image: patrickaclark/qbittorrent-port-manager:latest
+      #   name: qbittorrent-port-manager
       #   resources: {}
       #   securityContext:
       #     capabilities:

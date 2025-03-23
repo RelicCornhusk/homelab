@@ -27,6 +27,8 @@ spec:
           name: data
         - mountPath: /config
           name: config-radarr
+        ports:
+        - containerPort: 8096
       volumes:
       - persistentVolumeClaim:
           claimName: data
