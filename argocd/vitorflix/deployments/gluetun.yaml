@@ -44,8 +44,10 @@ spec:
       #       - CAP_NET_RAW
       #       - CAP_AUDIT_WRITE
       - env:
-      #  - name: FIREWALL_DEBUG
-      #    value: "on"
+        - name: FIREWALL_INPUT_PORTS
+          value: "8080"
+        # - name: FIREWALL_DEBUG
+        #   value: "on"
         - name: SERVER_COUNTRIES
           value: canada
         - name: VPN_SERVICE_PROVIDER
@@ -65,7 +67,7 @@ spec:
               name: openvpn-auth
               key: openvpn-password
         image: docker.io/qmcgaw/gluetun:latest
-        name: gluetun-container
+        name: gluetun
         resources: {}
         securityContext:
           privileged: true
