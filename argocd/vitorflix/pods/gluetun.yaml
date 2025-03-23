@@ -1,179 +1,179 @@
-# Save the output of this file and use kubectl create -f to import
-# it into Kubernetes.
-#
-# Created with podman-4.3.1
-apiVersion: v1
-kind: Pod
-metadata:
-  annotations:
-  labels:
-    app: gluetun
-  name: gluetun
-  namespace: vitorflix
-spec:
-  automountServiceAccountToken: false
-  containers:
-  - image: localhost/jelly-qbit-toggle:latest
-    name: media-servicesjelly-qbit-toggle1
-    ports:
-    - containerPort: 5000
-      hostPort: 5000
-    - containerPort: 6881
-      hostPort: 6881
-    - containerPort: 8080
-      hostPort: 8080
-    - containerPort: 8388
-      hostPort: 8388
-    - containerPort: 8888
-      hostPort: 8888
-    - containerPort: 6881
-      hostPort: 6881
-      protocol: UDP
-    - containerPort: 8388
-      hostPort: 8388
-      protocol: UDP
-    resources: {}
-    securityContext:
-      capabilities:
-        drop:
-        - CAP_MKNOD
-        - CAP_NET_RAW
-        - CAP_AUDIT_WRITE
-  - env:
-  #  - name: FIREWALL_DEBUG
-  #    value: "on"
-    - name: SERVER_COUNTRIES
-      value: canada
-    - name: VPN_SERVICE_PROVIDER
-      value: protonvpn
-    - name: PORT_FORWARD_ONLY
-      value: "on"
-    - name: VPN_PORT_FORWARDING
-      value: "on"
-    image: docker.io/qmcgaw/gluetun:latest
-    name: gluetun-container
-    resources: {}
-    securityContext:
-      privileged: true
-    volumeMounts:
-    - mountPath: /gluetun
-      name: docker-appdata-gluetun-host-0
-    - mountPath: /tmp/gluetun
-      name: docker-appdata-gluetun-tmp-host-1
-  - env:
-    - name: DOCKER_MODS
-      value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
-    - name: WEBUI_PORT
-      value: "8080"
-    - name: PUID
-      value: "1"
-    - name: PGID
-      value: "1"
-    image: lscr.io/linuxserver/qbittorrent:5.0.3 ## using this version for qbit_manage compatibility
-    name: qbittorrent
-    resources: {}
-    securityContext:
-      capabilities:
-        drop:
-        - CAP_MKNOD
-        - CAP_NET_RAW
-        - CAP_AUDIT_WRITE
-    volumeMounts:
-    - mountPath: /config
-      name: docker-appdata-qbittorrent-host-0
-    - mountPath: /data
-      name: data-host-1
-  - image: patrickaclark/gluetun-qbittorrent-port-manager:latest
-    name: gluetun-qbittorrent-port-manager
-    resources: {}
-    securityContext:
-      capabilities:
-        drop:
-        - CAP_MKNOD
-        - CAP_NET_RAW
-        - CAP_AUDIT_WRITE
-    volumeMounts:
-    - mountPath: /tmp/gluetun
-      name: docker-appdata-gluetun-tmp-host-0
-    - mountPath: /qbit-healthcheck.sh
-      name: qbit-healthcheck-sh-host-1
-  - env:
-    - name: QBT_TAG_UPDATE
-      value: "false"
-    - name: QBT_REM_ORPHANED
-      value: "true"
-    - name: QBT_REM_UNREGISTERED
-      value: "false"
-    - name: QBT_DIVIDER
-      value: =
-    - name: QBT_LOGFILE
-      value: activity.log
-    - name: QBT_CONFIG
-      value: config.yml
-    - name: QBT_WIDTH
-      value: "100"
-    - name: QBT_TAG_TRACKER_ERROR
-      value: "false"
-    - name: QBT_SKIP_CLEANUP
-      value: "false"
-    - name: QBT_CAT_UPDATE
-      value: "true"
-    - name: QBT_LOG_LEVEL
-      value: INFO
-    - name: QBT_DRY_RUN
-      value: "false"
-    - name: QBT_CROSS_SEED
-      value: "false"
-    - name: QBT_RECHECK
-      value: "false"
-    - name: QBT_RUN
-      value: "false"
-    - name: QBT_TAG_NOHARDLINKS
-      value: "true"
-    - name: QBT_SCHEDULE
-      value: "30"
-    image: docker.io/bobokun/qbit_manage:latest
-    name: qbitmanage
-    securityContext:
-      capabilities:
-        drop:
-        - CAP_MKNOD
-        - CAP_NET_RAW
-        - CAP_AUDIT_WRITE
-    volumeMounts:
-    - mountPath: /config
-      name: docker-appdata-qbit-manage-host-0
-    - mountPath: /data
-      name: data-host-1
-  enableServiceLinks: false
-  hostname: gluetun
-  volumes:
-  - hostPath:
-      path: /docker/appdata/gluetun-tmp
-      type: Directory
-    name: docker-appdata-gluetun-tmp-host-0
-  - hostPath:
-      path: /home/podman/docker-projects/media-services/qbit-healthcheck.sh
-      type: Directory
-    name: qbit-healthcheck-sh-host-1
-  - hostPath:
-      path: /docker/appdata/gluetun
-      type: Directory
-    name: docker-appdata-gluetun-host-0
-  - hostPath:
-      path: /docker/appdata/gluetun-tmp
-      type: Directory
-    name: docker-appdata-gluetun-tmp-host-1
-  - hostPath:
-      path: /docker/appdata/qbittorrent
-      type: Directory
-    name: docker-appdata-qbittorrent-host-0
-  - hostPath:
-      path: /docker/appdata/qbit-manage
-      type: Directory
-    name: docker-appdata-qbit-manage-host-0
-  - hostPath:
-      path: /data
-      type: Directory
-    name: data-host-1
-status: {}
+# # Save the output of this file and use kubectl create -f to import
+# # it into Kubernetes.
+# #
+# # Created with podman-4.3.1
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   annotations:
+#   labels:
+#     app: gluetun
+#   name: gluetun
+#   namespace: vitorflix
+# spec:
+#   automountServiceAccountToken: false
+#   containers:
+#   - image: localhost/jelly-qbit-toggle:latest
+#     name: media-servicesjelly-qbit-toggle1
+#     ports:
+#     - containerPort: 5000
+#       hostPort: 5000
+#     - containerPort: 6881
+#       hostPort: 6881
+#     - containerPort: 8080
+#       hostPort: 8080
+#     - containerPort: 8388
+#       hostPort: 8388
+#     - containerPort: 8888
+#       hostPort: 8888
+#     - containerPort: 6881
+#       hostPort: 6881
+#       protocol: UDP
+#     - containerPort: 8388
+#       hostPort: 8388
+#       protocol: UDP
+#     resources: {}
+#     securityContext:
+#       capabilities:
+#         drop:
+#         - CAP_MKNOD
+#         - CAP_NET_RAW
+#         - CAP_AUDIT_WRITE
+#   - env:
+#   #  - name: FIREWALL_DEBUG
+#   #    value: "on"
+#     - name: SERVER_COUNTRIES
+#       value: canada
+#     - name: VPN_SERVICE_PROVIDER
+#       value: protonvpn
+#     - name: PORT_FORWARD_ONLY
+#       value: "on"
+#     - name: VPN_PORT_FORWARDING
+#       value: "on"
+#     image: docker.io/qmcgaw/gluetun:latest
+#     name: gluetun-container
+#     resources: {}
+#     securityContext:
+#       privileged: true
+#     volumeMounts:
+#     - mountPath: /gluetun
+#       name: docker-appdata-gluetun-host-0
+#     - mountPath: /tmp/gluetun
+#       name: docker-appdata-gluetun-tmp-host-1
+#   - env:
+#     - name: DOCKER_MODS
+#       value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
+#     - name: WEBUI_PORT
+#       value: "8080"
+#     - name: PUID
+#       value: "1"
+#     - name: PGID
+#       value: "1"
+#     image: lscr.io/linuxserver/qbittorrent:5.0.3 ## using this version for qbit_manage compatibility
+#     name: qbittorrent
+#     resources: {}
+#     securityContext:
+#       capabilities:
+#         drop:
+#         - CAP_MKNOD
+#         - CAP_NET_RAW
+#         - CAP_AUDIT_WRITE
+#     volumeMounts:
+#     - mountPath: /config
+#       name: docker-appdata-qbittorrent-host-0
+#     - mountPath: /data
+#       name: data-host-1
+#   - image: patrickaclark/gluetun-qbittorrent-port-manager:latest
+#     name: gluetun-qbittorrent-port-manager
+#     resources: {}
+#     securityContext:
+#       capabilities:
+#         drop:
+#         - CAP_MKNOD
+#         - CAP_NET_RAW
+#         - CAP_AUDIT_WRITE
+#     volumeMounts:
+#     - mountPath: /tmp/gluetun
+#       name: docker-appdata-gluetun-tmp-host-0
+#     - mountPath: /qbit-healthcheck.sh
+#       name: qbit-healthcheck-sh-host-1
+#   - env:
+#     - name: QBT_TAG_UPDATE
+#       value: "false"
+#     - name: QBT_REM_ORPHANED
+#       value: "true"
+#     - name: QBT_REM_UNREGISTERED
+#       value: "false"
+#     - name: QBT_DIVIDER
+#       value: =
+#     - name: QBT_LOGFILE
+#       value: activity.log
+#     - name: QBT_CONFIG
+#       value: config.yml
+#     - name: QBT_WIDTH
+#       value: "100"
+#     - name: QBT_TAG_TRACKER_ERROR
+#       value: "false"
+#     - name: QBT_SKIP_CLEANUP
+#       value: "false"
+#     - name: QBT_CAT_UPDATE
+#       value: "true"
+#     - name: QBT_LOG_LEVEL
+#       value: INFO
+#     - name: QBT_DRY_RUN
+#       value: "false"
+#     - name: QBT_CROSS_SEED
+#       value: "false"
+#     - name: QBT_RECHECK
+#       value: "false"
+#     - name: QBT_RUN
+#       value: "false"
+#     - name: QBT_TAG_NOHARDLINKS
+#       value: "true"
+#     - name: QBT_SCHEDULE
+#       value: "30"
+#     image: docker.io/bobokun/qbit_manage:latest
+#     name: qbitmanage
+#     securityContext:
+#       capabilities:
+#         drop:
+#         - CAP_MKNOD
+#         - CAP_NET_RAW
+#         - CAP_AUDIT_WRITE
+#     volumeMounts:
+#     - mountPath: /config
+#       name: docker-appdata-qbit-manage-host-0
+#     - mountPath: /data
+#       name: data-host-1
+#   enableServiceLinks: false
+#   hostname: gluetun
+#   volumes:
+#   - hostPath:
+#       path: /docker/appdata/gluetun-tmp
+#       type: Directory
+#     name: docker-appdata-gluetun-tmp-host-0
+#   - hostPath:
+#       path: /home/podman/docker-projects/media-services/qbit-healthcheck.sh
+#       type: Directory
+#     name: qbit-healthcheck-sh-host-1
+#   - hostPath:
+#       path: /docker/appdata/gluetun
+#       type: Directory
+#     name: docker-appdata-gluetun-host-0
+#   - hostPath:
+#       path: /docker/appdata/gluetun-tmp
+#       type: Directory
+#     name: docker-appdata-gluetun-tmp-host-1
+#   - hostPath:
+#       path: /docker/appdata/qbittorrent
+#       type: Directory
+#     name: docker-appdata-qbittorrent-host-0
+#   - hostPath:
+#       path: /docker/appdata/qbit-manage
+#       type: Directory
+#     name: docker-appdata-qbit-manage-host-0
+#   - hostPath:
+#       path: /data
+#       type: Directory
+#     name: data-host-1
+# status: {}

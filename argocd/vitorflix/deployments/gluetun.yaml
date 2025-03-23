@@ -43,37 +43,37 @@ spec:
       #       - CAP_MKNOD
       #       - CAP_NET_RAW
       #       - CAP_AUDIT_WRITE
-      # - env:
-      # #  - name: FIREWALL_DEBUG
-      # #    value: "on"
-      #   - name: SERVER_COUNTRIES
-      #     value: canada
-      #   - name: VPN_SERVICE_PROVIDER
-      #     value: protonvpn
-      #   - name: PORT_FORWARD_ONLY
-      #     value: "on"
-      #   - name: VPN_PORT_FORWARDING
-      #     value: "on"
-      #   - name: OPENVPN_USER
-      #     valueFrom:
-      #       secretKeyRef:
-      #         name: openvpn-auth
-      #         key: openvpn-user 
-      #   - name: OPENVPN_PASSWORD
-      #     valueFrom:
-      #       secretKeyRef:
-      #         name: openvpn-auth
-      #         key: openvpn-password
-      #   image: docker.io/qmcgaw/gluetun:latest
-      #   name: gluetun-container
-      #   resources: {}
-      #   securityContext:
-      #     privileged: true
-      #   volumeMounts:
-      #   - mountPath: /gluetun
-      #     name: config-gluetun
-      #   - mountPath: /tmp/gluetun
-      #     name: config-gluetun
+      - env:
+      #  - name: FIREWALL_DEBUG
+      #    value: "on"
+        - name: SERVER_COUNTRIES
+          value: canada
+        - name: VPN_SERVICE_PROVIDER
+          value: protonvpn
+        - name: PORT_FORWARD_ONLY
+          value: "on"
+        - name: VPN_PORT_FORWARDING
+          value: "on"
+        - name: OPENVPN_USER
+          valueFrom:
+            secretKeyRef:
+              name: openvpn-auth
+              key: openvpn-user 
+        - name: OPENVPN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: openvpn-auth
+              key: openvpn-password
+        image: docker.io/qmcgaw/gluetun:latest
+        name: gluetun-container
+        resources: {}
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /gluetun
+          name: config-gluetun
+        - mountPath: /tmp/gluetun
+          name: config-gluetun
       - env:
         # - name: DOCKER_MODS
         #   value: ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
