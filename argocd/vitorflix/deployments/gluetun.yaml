@@ -86,6 +86,8 @@ spec:
         image: lscr.io/linuxserver/qbittorrent:5.0.3 ## using this version for qbit_manage compatibility
         name: qbittorrent
         resources: {}
+        ports:
+        - containerPort: 8080
         securityContext:
           capabilities:
             drop:
