@@ -75,8 +75,8 @@ spec:
         - mountPath: /tmp/gluetun
           name: config-gluetun
       - env:
-        - name: DOCKER_MODS
-          value: "ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest"
+        # - name: DOCKER_MODS
+        #   value: ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
         - name: WEBUI_PORT
           value: "8080"
         # - name: PUID
