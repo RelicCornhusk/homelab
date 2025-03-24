@@ -22,6 +22,17 @@ spec:
       - image: lscr.io/linuxserver/radarr:latest
         name: radarr
         resources: {}
+        env:
+        - name: PGID
+          value: "1000"
+        - name: PUID
+          value: "1000"
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          mkdir -p /data/media/movies &&
+          chown -R $PUID:$PGID /data &&
+          exec /init
         volumeMounts:
         - mountPath: /data
           name: data

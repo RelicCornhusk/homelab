@@ -1,52 +1,52 @@
-# Save the output of this file and use kubectl create -f to import
-# it into Kubernetes.
-#
-# Created with podman-4.3.1
+# # Save the output of this file and use kubectl create -f to import
+# # it into Kubernetes.
+# #
+# # Created with podman-4.3.1
 
-# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
-# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
-# has the right permissions to access the volumes added.
----
-apiVersion: v1
-kind: Pod
-metadata:
-  annotations:
-  namespace: vitorflix
-  labels:
-    app: sonarr
-  name: sonarr
-spec:
-  restartPolicy: Always
-  automountServiceAccountToken: false
-  containers:
-  - env:
-    - name: PGID
-      value: "1"
-    - name: PUID
-      value: "1"
-    image: ghcr.io/hotio/sonarr:v4
-    name: sonarr
-    ports:
-    - containerPort: 8989
-      hostPort: 8989
-    securityContext:
-      capabilities:
-        drop:
-        - CAP_MKNOD
-        - CAP_NET_RAW
-        - CAP_AUDIT_WRITE
-    volumeMounts:
-    - mountPath: /config
-      name: docker-appdata-sonarr-host-1
-    - mountPath: /data
-      name: data-host-2
-  enableServiceLinks: false
-  volumes:
-  - hostPath:
-      path: /docker/appdata/sonarr
-      type: Directory
-    name: docker-appdata-sonarr-host-1
-  - hostPath:
-      path: /data
-      type: Directory
-    name: data-host-2
+# # NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
+# # enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
+# # has the right permissions to access the volumes added.
+# ---
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   annotations:
+#   namespace: vitorflix
+#   labels:
+#     app: sonarr
+#   name: sonarr
+# spec:
+#   restartPolicy: Always
+#   automountServiceAccountToken: false
+#   containers:
+#   - env:
+#     - name: PGID
+#       value: "1"
+#     - name: PUID
+#       value: "1"
+#     image: ghcr.io/hotio/sonarr:v4
+#     name: sonarr
+#     ports:
+#     - containerPort: 8989
+#       hostPort: 8989
+#     securityContext:
+#       capabilities:
+#         drop:
+#         - CAP_MKNOD
+#         - CAP_NET_RAW
+#         - CAP_AUDIT_WRITE
+#     volumeMounts:
+#     - mountPath: /config
+#       name: docker-appdata-sonarr-host-1
+#     - mountPath: /data
+#       name: data-host-2
+#   enableServiceLinks: false
+#   volumes:
+#   - hostPath:
+#       path: /docker/appdata/sonarr
+#       type: Directory
+#     name: docker-appdata-sonarr-host-1
+#   - hostPath:
+#       path: /data
+#       type: Directory
+#     name: data-host-2

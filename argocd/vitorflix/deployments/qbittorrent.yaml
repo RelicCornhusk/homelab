@@ -82,12 +82,18 @@ spec:
         #   value: ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
         - name: WEBUI_PORT
           value: "8080"
-        # - name: PUID
-        #   value: "1"
-        # - name: PGID
-        #   value: "1"
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
         image: lscr.io/linuxserver/qbittorrent:5.0.3 ## using this version for qbit_manage compatibility
         resources: {}
+        commands: ["sh", "-c"]
+        args:
+        - |
+          mkdir -p /data/downloads &&
+          chown -R $PUID:$PGID /data &&
+          exec /init
         ports:
         - containerPort: 8080
         securityContext:
