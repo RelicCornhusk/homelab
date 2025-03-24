@@ -88,12 +88,12 @@ spec:
           value: "1000"
         image: lscr.io/linuxserver/qbittorrent:5.0.3 ## using this version for qbit_manage compatibility
         resources: {}
-        commands: ["sh", "-c"]
-        args:
-        - |
-          mkdir -p /data/downloads &&
-          chown -R $PUID:$PGID /data &&
-          exec /init
+        # commands: ["sh", "-c"]
+        # args:
+        # - |
+        #   mkdir -p /data/downloads &&
+        #   chown -R $PUID:$PGID /data &&
+        #   exec /init
         ports:
         - containerPort: 8080
         securityContext:
