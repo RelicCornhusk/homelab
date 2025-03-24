@@ -5,6 +5,7 @@ metadata:
   labels:
     app: prowlarr
   name: prowlarr
+  namespace: vitorflix
 spec:
   ports:
   - port: 9696
