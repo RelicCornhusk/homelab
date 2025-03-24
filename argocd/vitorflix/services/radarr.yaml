@@ -7,9 +7,9 @@ metadata:
   name: radarr
 spec:
   ports:
-  - port: 8096
+  - port: 7878
     protocol: TCP
-    targetPort: 8096
+    targetPort: 7878
   selector:
     app: radarr
 status:
