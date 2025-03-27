@@ -11,4 +11,3 @@ provisioner: csi.proxmox.sinextra.dev
 allowVolumeExpansion: true
 reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
-`
