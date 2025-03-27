@@ -5,7 +5,7 @@ metadata:
 parameters:
   csi.storage.k8s.io/fstype: xfs
   storage: local-btrfs
-  cache: writethrough
+  cache: none
   ssd: "true"
 provisioner: csi.proxmox.sinextra.dev
 allowVolumeExpansion: true
