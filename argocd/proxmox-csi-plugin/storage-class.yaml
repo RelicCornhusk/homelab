@@ -9,5 +9,5 @@ parameters:
   ssd: "true"
 provisioner: csi.proxmox.sinextra.dev
 allowVolumeExpansion: true
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
