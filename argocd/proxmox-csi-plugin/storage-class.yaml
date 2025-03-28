@@ -3,7 +3,7 @@ kind: StorageClass
 metadata:
   name: proxmox-csi
 parameters:
-  csi.storage.k8s.io/fstype: xfs
+  csi.storage.k8s.io/fstype: ext4
   storage: local-btrfs
   cache: none
   ssd: "true"
