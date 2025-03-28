@@ -63,21 +63,21 @@ module "proxmox_csi_plugin" {
   proxmox = var.proxmox
 }
 
-module "volumes" {
-  depends_on = [module.proxmox_csi_plugin]
-  source = "./bootstrap/volumes"
+# module "volumes" {
+#   depends_on = [module.proxmox_csi_plugin]
+#   source = "./bootstrap/volumes"
 
-  providers = {
-    restapi    = restapi
-    kubernetes = kubernetes
-  }
+#   providers = {
+#     restapi    = restapi
+#     kubernetes = kubernetes
+#   }
 
-  proxmox_api = var.proxmox
+#   proxmox_api = var.proxmox
 
-  volumes = {
-    pv-test = {
-      node = "media-server"
-      size = "36G"
-    }
-  }
-}
+#   volumes = {
+#     pv-test = {
+#       node = "media-server"
+#       size = "36G"
+#     }
+#   }
+# }

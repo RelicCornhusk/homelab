@@ -10,4 +10,4 @@ parameters:
 provisioner: csi.proxmox.sinextra.dev
 allowVolumeExpansion: true
 reclaimPolicy: Delete
-volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
