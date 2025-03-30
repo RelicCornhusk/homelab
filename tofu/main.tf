@@ -63,6 +63,14 @@ module "proxmox_csi_plugin" {
   proxmox = var.proxmox
 }
 
+module "argocd" {
+  depends_on = [ module.talos ]
+  source = "./bootstrap/argocd"
+  providers = {
+    helm = helm
+  }
+}
+# Use the module below to pre-create VM Disks and their respective Persistent Volumes
 # module "volumes" {
 #   depends_on = [module.proxmox_csi_plugin]
 #   source = "./bootstrap/volumes"

@@ -47,6 +47,9 @@ resource "talos_machine_configuration_apply" "this" {
 }
 
 resource "talos_machine_bootstrap" "this" {
+  depends_on = [ 
+    talos_machine_configuration_apply.this    
+  ]
   node                 = [for k, v in var.nodes : v.ip if v.machine_type == "controlplane"][0]
   endpoint             = var.cluster.endpoint
   client_configuration = talos_machine_secrets.this.client_configuration

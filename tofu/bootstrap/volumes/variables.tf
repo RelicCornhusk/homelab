@@ -14,7 +14,7 @@ variable "volumes" {
     object({
       node = string
       size = string
-      storage = optional(string, "local-btrfs")
+      storage = optional(string, "local-lvm")
       vmid = optional(number, null)
       format = optional(string, "raw")
     })
