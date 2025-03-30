@@ -32,7 +32,8 @@ module "talos" {
       mac_address   = "a8:b8:e0:04:fa:42"
       vm_id         = 800
       cpu           = 4
-      ram_dedicated = 15360
+      ram_dedicated = 13722
+      ram_floating  = 8196
     }
   }
 }

@@ -35,6 +35,7 @@ variable "nodes" {
     vm_id         = number
     cpu           = number
     ram_dedicated = number
+    ram_floating  = number
     update = optional(bool, false)
     igpu = optional(bool, false)
   }))
