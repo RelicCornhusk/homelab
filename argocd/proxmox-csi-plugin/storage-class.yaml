@@ -4,7 +4,7 @@ metadata:
   name: proxmox-csi
 parameters:
   csi.storage.k8s.io/fstype: ext4
-  storage: local
+  storage: local-lvm
   cache: none
   ssd: "true"
 provisioner: csi.proxmox.sinextra.dev
