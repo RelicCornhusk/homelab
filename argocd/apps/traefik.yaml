@@ -7,12 +7,19 @@ spec:
   destination:
     namespace: traefik
     server: https://kubernetes.default.svc
-  source:
-    path: argocd/traefik
-    repoURL: https://github.com/RelicCornhusk/homelab.git
-    targetRevision: HEAD
-  sources: []
+  sources:
+    - repoURL: https://traefik.github.io/charts
+      targetRevision: 34.4.1
+      chart: traefik
+      helm:
+        valueFiles:
+        - $values/argocd/traefik/values.yaml
+    - repoURL: https://github.com/RelicCornhusk/homelab.git 
+      targetRevision: HEAD
+      ref: values
   project: default
   syncPolicy:
     automated:
       prune: true
+    syncOptions:
+      - CreateNamespace=true
