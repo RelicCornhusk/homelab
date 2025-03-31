@@ -13,7 +13,7 @@ spec:
   #       - jellyfin.vitorflix.club
   #     secretName: jellyfin-ingress-tls
   rules:
-    - host: jellyfin.vitorflix.club
+    - host: vitorflix.club
       http:
         paths:
           - path: /
