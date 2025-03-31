@@ -34,6 +34,7 @@ module "talos" {
       cpu           = 4
       ram_dedicated = 13722
       ram_floating  = 8196
+      igpu          = true
     }
   }
 }
