@@ -11,7 +11,7 @@ spec:
   tls:
     - hosts:
         - jellyfin.vitorflix.club
-      secretName: jellyfin-ingress-tls
+      secretName: vitorflix-ingress-tls
   rules:
     - host: jellyfin.vitorflix.club
       http:
