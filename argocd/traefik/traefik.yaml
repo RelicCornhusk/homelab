@@ -14,7 +14,7 @@ spec:
       helm:
         valueFiles:
         - $values/argocd/traefik/values.yaml
-    - repoUrl: https://github.com/RelicCornhusk/homelab.git 
+    - repoURL: https://github.com/RelicCornhusk/homelab.git 
       targetRevision: HEAD
       ref: values
   project: default
