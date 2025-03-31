@@ -3,15 +3,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: jellyfin
-  namespace: traefik
+  namespace: vitorflix
   annotations:
     cert-manager.io/cluster-issuer: cloudflare-cluster-issuer
 spec:
-  ingressClassName: cilium
-  tls:
-    - hosts:
-        - jellyfin.vitorflix.club
-      secretName: wildcard-vitorflix-tls
+  ingressClassName: traefik # It was cilium before
+  # tls:
+  #   - hosts:
+  #       - jellyfin.vitorflix.club
+  #     secretName: jellyfin-ingress-tls
   rules:
     - host: jellyfin.vitorflix.club
       http:
