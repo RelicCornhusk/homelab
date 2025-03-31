@@ -16,6 +16,7 @@ spec:
         - $values/argocd/traefik/values.yaml
     - repoURL: https://github.com/RelicCornhusk/homelab.git 
       targetRevision: HEAD
+      path: argocd/traefik
       ref: values
   project: default
   syncPolicy:
