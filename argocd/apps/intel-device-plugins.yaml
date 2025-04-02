@@ -8,13 +8,9 @@ spec:
     namespace: intel-device-plugins
     server: https://kubernetes.default.svc
   source:
-    path: argocd/intel-device-plugins
+    path: argocd/intel-device-plugins/gpu
     repoURL: https://github.com/RelicCornhusk/homelab.git
     targetRevision: HEAD
-    kustomize: {}
-    directory:
-      recurse: true
-  sources: []
   project: default
   syncPolicy:
     automated:
