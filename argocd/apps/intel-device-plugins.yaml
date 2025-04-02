@@ -10,9 +10,7 @@ spec:
   source:
     path: argocd/intel-device-plugins/gpu
     kustomize:
-      namePrefix: intel-device-plugins-gpu-
-      helmGlobals:
-        enableHelm: true  # Enable Helm support
+      enableHelm: true  # Enable Helm support
     repoURL: https://github.com/RelicCornhusk/homelab.git
     targetRevision: HEAD
   project: default
