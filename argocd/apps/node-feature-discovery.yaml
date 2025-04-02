@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfd
+  namespace: argocd
+spec:
+  destination:
+    namespace: nfd
+    server: https://kubernetes.default.svc
+  source:
+    path: argocd/nfd
+    repoURL: https://github.com/RelicCornhusk/homelab.git
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
