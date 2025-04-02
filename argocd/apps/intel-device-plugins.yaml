@@ -9,6 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     path: argocd/intel-device-plugins/gpu
+    kustomize: {}
     repoURL: https://github.com/RelicCornhusk/homelab.git
     targetRevision: HEAD
   project: default
