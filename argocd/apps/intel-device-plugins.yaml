@@ -12,14 +12,15 @@ spec:
       targetRevision: 0.32.0
       chart: intel-device-plugins-operator
       helm:
-        values: |
-          name: igpu
-          sharedDevNum: 0
-          nodeFeatureRule: false
-          nodeSelector:
-            intel.feature.node.kubernetes.io/gpu: 'true'
         parameters:
         - name: installCRDs
+          value: "true"
+    - repoURL: https://intel.github.io/gpu
+      targetRevision: 0.32.0
+      chart: intel-device-plugins-gpu
+      helm:
+        parameters:
+        - name: nodeFeatureRule
           value: "true"
   project: default
   syncPolicy:
