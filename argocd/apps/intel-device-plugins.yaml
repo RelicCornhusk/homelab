@@ -8,7 +8,7 @@ spec:
     namespace: intel-device-plugins
     server: https://kubernetes.default.svc
   sources:
-    - repoURL: https://intel.github.io/helm-charts/
+    - repoURL: https://intel.github.io/helm-charts
       targetRevision: 0.32.0
       chart: intel-device-plugins
       helm:
