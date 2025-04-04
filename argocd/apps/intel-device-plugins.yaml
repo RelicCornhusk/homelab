@@ -20,7 +20,6 @@ spec:
       chart: intel-device-plugins-gpu
       helm:
         parameters:
-        parameters:
         - name: includeCRDs
           value: "true"
         values: |
