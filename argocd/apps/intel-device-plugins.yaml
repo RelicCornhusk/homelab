@@ -14,6 +14,9 @@ spec:
       helm:
         valueFiles:
         - $values/argocd/intel-device-plugins/values.yaml
+        parameters:
+        - name: installCRDs
+          value: true
     - repoURL: https://github.com/RelicCornhusk/homelab.git 
       targetRevision: HEAD
       path: argocd/intel-device-plugins
