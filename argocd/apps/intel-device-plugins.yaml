@@ -17,7 +17,7 @@ spec:
           sharedDevNum: 0
           nodeFeatureRule: false
           nodeSelector:
-          intel.feature.node.kubernetes.io/gpu: 'true'
+            intel.feature.node.kubernetes.io/gpu: 'true'
         parameters:
         - name: installCRDs
           value: "true"
