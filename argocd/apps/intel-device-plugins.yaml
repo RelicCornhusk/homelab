@@ -20,7 +20,11 @@ spec:
       chart: intel-device-plugins-gpu
       helm:
         parameters:
-          nodeFeatureRule: "false"
+        parameters:
+        - name: includeCRDs
+          value: "true"
+        values: |
+          nodeFeatureRule: false
   project: default
   syncPolicy:
     automated:
