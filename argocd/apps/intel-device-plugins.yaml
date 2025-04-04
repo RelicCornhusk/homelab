@@ -7,12 +7,16 @@ spec:
   destination:
     namespace: intel-device-plugins
     server: https://kubernetes.default.svc
-  source:
-    path: argocd/intel-device-plugins/gpu
-    kustomize:
-      enableHelm: true  # Enable Helm support
-    repoURL: https://github.com/RelicCornhusk/homelab.git
-    targetRevision: HEAD
+  sources:
+    - repoURL: https://intel.github.io/helm-charts/
+      targetRevision: 0.32.0
+      chart: intel-device-plugins
+      helm:
+        valueFiles:
+        - $values/argocd/intel-device-plugins/values.yaml
+    - repoURL: https://github.com/RelicCornhusk/homelab.git 
+      targetRevision: HEAD
+      ref: values
   project: default
   syncPolicy:
     automated:
