@@ -21,7 +21,9 @@ spec:
       containers:
       - image: lscr.io/linuxserver/jellyfin:latest
         name: jellyfin
-        resources: {}
+        resources:
+            limits:
+              gpu.intel.com/i915: 1000m
         volumeMounts:
         - mountPath: /data
           name: data
