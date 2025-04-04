@@ -16,6 +16,7 @@ spec:
         - $values/argocd/intel-device-plugins/values.yaml
     - repoURL: https://github.com/RelicCornhusk/homelab.git 
       targetRevision: HEAD
+      path: argocd/intel-device-plugins
       ref: values
   project: default
   syncPolicy:
