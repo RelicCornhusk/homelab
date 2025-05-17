@@ -1,0 +1,12 @@
+server:
+  additionalApplications:
+   - name: apps
+     namespace: argocd
+     project: default
+     source:
+       repoURL: https://github.com/RelicCornhusk/homelab.git
+       targetRevision: HEAD
+       path: argocd/apps
+     destination:
+       server: https://kubernetes.default.svc
+       namespace: argocd
