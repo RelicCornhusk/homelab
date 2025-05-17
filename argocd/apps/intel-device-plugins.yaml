@@ -5,25 +5,13 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: intel-device-plugins
+    namespace: intel-device-plugins-helm
     server: https://kubernetes.default.svc
-  sources:
-    - repoURL: https://intel.github.io/helm-charts
-      targetRevision: 0.32.0
-      chart: intel-device-plugins-operator
-      helm:
-        parameters:
-        - name: installCRDs
-          value: "true"
-    - repoURL: https://intel.github.io/helm-charts
-      targetRevision: 0.32.0
-      chart: intel-device-plugins-gpu
-      helm:
-        parameters:
-        - name: includeCRDs
-          value: "true"
-        values: |
-          nodeFeatureRule: false
+  source:
+    path: argocd/intel-device-plugins
+    repoURL: https://github.com/RelicCornhusk/homelab.git
+    targetRevision: HEAD
+  sources: []
   project: default
   syncPolicy:
     automated:

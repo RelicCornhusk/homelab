@@ -1,5 +1,0 @@
-name: igpu
-sharedDevNum: 1
-nodeFeatureRule: false
-nodeSelector:
-  intel.feature.node.kubernetes.io/gpu: 'true'
