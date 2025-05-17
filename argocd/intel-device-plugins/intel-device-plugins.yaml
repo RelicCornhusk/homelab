@@ -8,15 +8,15 @@ spec:
     namespace: intel-device-plugins
     server: https://kubernetes.default.svc
   source:
-    - repoURL: https://intel.github.io/helm-charts
-      targetRevision: 0.32.0
-      chart: intel-device-plugins-gpu
-      helm:
-        parameters:
-        - name: includeCRDs
-          value: "true"
-        values: |
-          nodeFeatureRule: false
+    repoURL: https://intel.github.io/helm-charts
+    targetRevision: 0.32.0
+    chart: intel-device-plugins-gpu
+    helm:
+      parameters:
+      - name: includeCRDs
+        value: "true"
+      values: |
+        nodeFeatureRule: false
   project: default
   syncPolicy:
     automated:
