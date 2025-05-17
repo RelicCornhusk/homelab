@@ -7,13 +7,13 @@ module "talos" {
   }
 
   image = {
-    version = "v1.9.5"
+    version   = "v1.9.5"
     schematic = file("${path.module}/talos/image/schematic.yaml")
   }
 
   cilium = {
     install = file("${path.module}/talos/inline-manifests/cilium-install.yaml")
-    values = file("${path.module}/../kubernetes/cilium/values.yaml")
+    values  = file("${path.module}/../kubernetes/cilium/values.yaml")
   }
 
   cluster = {
@@ -41,7 +41,7 @@ module "talos" {
 
 module "sealed_secrets" {
   depends_on = [module.talos]
-  source = "./bootstrap/sealed-secrets"
+  source     = "./bootstrap/sealed-secrets"
 
   providers = {
     kubernetes = kubernetes
@@ -49,13 +49,13 @@ module "sealed_secrets" {
 
   cert = {
     cert = file("${path.module}/bootstrap/sealed-secrets/certificate/sealed-secrets.cert")
-    key = file("${path.module}/bootstrap/sealed-secrets/certificate/sealed-secrets.key")
+    key  = file("${path.module}/bootstrap/sealed-secrets/certificate/sealed-secrets.key")
   }
 }
 
 module "proxmox_csi_plugin" {
   depends_on = [module.talos]
-  source = "./bootstrap/proxmox-csi-plugin"
+  source     = "./bootstrap/proxmox-csi-plugin"
 
   providers = {
     proxmox    = proxmox
@@ -65,13 +65,13 @@ module "proxmox_csi_plugin" {
   proxmox = var.proxmox
 }
 
-module "argocd" {
-  depends_on = [ module.talos ]
-  source = "./bootstrap/argocd"
-  providers = {
-    helm = helm
-  }
-}
+# module "argocd" {
+#   depends_on = [ module.talos ]
+#   source = "./bootstrap/argocd"
+#   providers = {
+#     helm = helm
+#   }
+# }
 # Use the module below to pre-create VM Disks and their respective Persistent Volumes
 # module "volumes" {
 #   depends_on = [module.proxmox_csi_plugin]
@@ -93,14 +93,38 @@ module "argocd" {
 # }
 
 resource "helm_release" "argocd" {
-  name = "argocd"
+  depends_on       = [module.talos]
+  name             = "argocd"
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
   namespace        = "argocd"
   version          = "8.0.3"
   create_namespace = true
+}
 
-  values = [
-    file("../argocd/application.yaml")
-  ]
+resource "kubernetes_manifest" "app_of_apps" {
+  depends_on = [ helm_release.argocd ]
+  manifest = {
+    "apiVersion" = "argoproj.io/v1alpha1"
+    "kind" = "Application"
+    "metadata" = {
+      "finalizers" = [
+        "resources-finalizer.argocd.argoproj.io",
+      ]
+      "name" = "applications"
+      "namespace" = "argocd"
+    }
+    "spec" = {
+      "destination" = {
+        "namespace" = "default"
+        "server" = "https://kubernetes.default.svc"
+      }
+      "project" = "default"
+      "source" = {
+        "path" = "argocd/apps"
+        "repoURL" = "https://github.com/RelicCornhusk/homelab.git"
+        "targetRevision" = "HEAD"
+      }
+    }
+  }
 }

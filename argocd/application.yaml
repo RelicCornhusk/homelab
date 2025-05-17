@@ -4,7 +4,7 @@ server:
      namespace: argocd
      project: default
      source:
-       repoURL: https://github.com/RelicCornhusk/homelab.git
+       repoURL: https://github.com/RelicCornhusk/homelab
        targetRevision: HEAD
        path: argocd/apps
      destination:

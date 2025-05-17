@@ -65,7 +65,7 @@ data "talos_cluster_health" "this" {
   worker_nodes         = [for k, v in var.nodes : v.ip if v.machine_type == "worker"]
   endpoints            = data.talos_client_configuration.this.endpoints
   timeouts = {
-    read = "10m"
+    read = "20m"
   }
 }
 
