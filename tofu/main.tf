@@ -102,6 +102,7 @@ resource "helm_release" "argocd" {
   create_namespace = true
 }
 
+
 resource "kubernetes_manifest" "app_of_apps" {
   depends_on = [ helm_release.argocd ]
   manifest = {

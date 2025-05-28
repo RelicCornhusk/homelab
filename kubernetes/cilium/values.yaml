@@ -3,6 +3,7 @@ cluster:
   id: 1
 
 kubeProxyReplacement: true
+gatewayAPI.enabled: true
 
 # Talos specific
 k8sServiceHost: localhost
