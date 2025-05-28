@@ -4,6 +4,8 @@ cluster:
 
 kubeProxyReplacement: true
 gatewayAPI.enabled: true
+envoy.securityContext.capabilities.keepCapNetBindService: true
+
 
 # Talos specific
 k8sServiceHost: localhost
