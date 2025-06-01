@@ -11,3 +11,4 @@ spec:
     requests:
       storage: 100Gi
   storageClassName: proxmox-csi
+  volumeName: newdata
