@@ -73,38 +73,37 @@ resource "helm_release" "argocd" {
   namespace        = "argocd"
   version          = "8.0.14"
   create_namespace = true
-  set {
+  set = [{
     name  = "configs.secret.argocdServerAdminPassword"
     value = var.argocd.admin_password
-  }
-  set {
+    }, {
     name  = "configs.secret.argocdServerAdminPasswordMtime"
     value = timestamp()
-  }
+  }]
 }
 
 
 resource "kubernetes_manifest" "app_of_apps" {
-  depends_on = [ helm_release.argocd ]
+  depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "argoproj.io/v1alpha1"
-    "kind" = "Application"
+    "kind"       = "Application"
     "metadata" = {
       "finalizers" = [
         "resources-finalizer.argocd.argoproj.io",
       ]
-      "name" = "applications"
+      "name"      = "applications"
       "namespace" = "argocd"
     }
     "spec" = {
       "destination" = {
         "namespace" = "default"
-        "server" = "https://kubernetes.default.svc"
+        "server"    = "https://kubernetes.default.svc"
       }
       "project" = "default"
       "source" = {
-        "path" = "argocd/apps"
-        "repoURL" = "https://github.com/RelicCornhusk/homelab.git"
+        "path"           = "argocd/apps"
+        "repoURL"        = "https://github.com/RelicCornhusk/homelab.git"
         "targetRevision" = "HEAD"
       }
     }
