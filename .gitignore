@@ -2,7 +2,7 @@
 **/secrets
 **/certificate
 output
-proxmox.auto.tfvars
+*.tfvars
 
 ## Terraform/tofu gitignore
 # Compiled files

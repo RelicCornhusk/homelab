@@ -22,6 +22,14 @@ terraform {
       version = "~> 1.0"
     }
   }
+
+  cloud { 
+    organization = "vitorcorp" 
+
+    workspaces { 
+      name = "homelab" 
+    } 
+  } 
 }
 
 provider "proxmox" {
@@ -54,7 +62,7 @@ provider "restapi" {
 }
 
 provider "helm" {
-  kubernetes = {
+  kubernetes {
     host                   = module.talos.kube_config.kubernetes_client_configuration.host
     client_certificate     = base64decode(module.talos.kube_config.kubernetes_client_configuration.client_certificate)
     client_key             = base64decode(module.talos.kube_config.kubernetes_client_configuration.client_key)
