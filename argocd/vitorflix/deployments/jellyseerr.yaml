@@ -24,8 +24,6 @@ spec:
         - name: TZ
           value: America/Toronto
         volumeMounts:
-        - mountPath: /data
-          name: data
         - mountPath: /config
           name: config-jellyseerr
         ports:
@@ -34,3 +32,4 @@ spec:
       - persistentVolumeClaim:
           claimName: config-jellyseerr
         name: config-jellyseerr
+ 
