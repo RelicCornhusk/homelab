@@ -3,24 +3,24 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: radarr
-  name: radarr
+    app: bazarr
+  name: bazarr
   namespace: vitorflix
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: radarr
+      app: bazarr
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: radarr
+        app: bazarr
     spec:
       containers:
-      - image: ghcr.io/linuxserver/radarr:5.26.2
-        name: radarr
+      - image: ghcr.io/linuxserver/bazarr:1.5.2
+        name: bazarr
         resources: {}
         env:
         - name: PGID
@@ -37,7 +37,7 @@ spec:
         - mountPath: /data
           name: data
         - mountPath: /config
-          name: config-radarr
+          name: config-bazarr
         ports:
         - containerPort: 7878
       volumes:
@@ -45,6 +45,6 @@ spec:
           claimName: data
         name: data
       - persistentVolumeClaim:
-          claimName: config-radarr
-        name: config-radarr
+          claimName: config-bazarr
+        name: config-bazarr
 status: {}

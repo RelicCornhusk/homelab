@@ -13,5 +13,3 @@ spec:
     targetPort: 9696
   selector:
     app: prowlarr
-status:
-  loadBalancer: {}

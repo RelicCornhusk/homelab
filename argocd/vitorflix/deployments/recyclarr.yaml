@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarr
+  name: sonarr
+  namespace: vitorflix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+      - image: ghcr.io/recyclarr/recyclarr:7.4.1
+        name: recyclarr
+      volumeMounts:
+      - mountPath: /config
+        name: config-recyclarr
+      volumes:
+      - persistentVolumeClaim:
+          claimName: config-recyclarr
+        name: config-recyclarr

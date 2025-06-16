@@ -3,12 +3,12 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: radarr
-  name: radarr
+    app: sonarr
+  name: sonarr
 spec:
   ports:
-  - port: 7878
+  - port: 8989
     protocol: TCP
-    targetPort: 7878
+    targetPort: 8989
   selector:
-    app: radarr
+    app: sonarr

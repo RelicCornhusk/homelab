@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jellyseerr
+  name: jellyseerr
+  namespace: vitorflix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyseerr
+  template:
+    metadata:
+      labels:
+        app: jellyseerr
+    spec:
+      containers:
+      - image: fallenbagel/jellyseerr:2.6.0
+        name: jellyseerr
+        env:
+        - name: LOG_LEVEL
+          value: debug
+        - name: TZ
+          value: America/Toronto
+        volumeMounts:
+        - mountPath: /data
+          name: data
+        - mountPath: /config
+          name: config-jellyseerr
+        ports:
+        - containerPort: 5055
+      volumes:
+      - persistentVolumeClaim:
+          claimName: config-jellyseerr
+        name: config-jellyseerr
