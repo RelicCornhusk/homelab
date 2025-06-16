@@ -9,6 +9,5 @@ spec:
   volumeMode: Filesystem
   resources:
     requests:
-      storage: 100Gi
+      storage: 3072Gi
   storageClassName: proxmox-csi
-  volumeName: newdata
