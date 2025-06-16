@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: sonarr
-  name: sonarr
+    app: recyclarr
+  name: recyclarr
   namespace: vitorflix
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sonarr
+      app: recyclarr
   template:
     metadata:
       labels:
-        app: sonarr
+        app: recyclarr
     spec:
       containers:
       - image: ghcr.io/recyclarr/recyclarr:7.4.1
