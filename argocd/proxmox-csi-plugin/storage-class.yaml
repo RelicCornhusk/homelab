@@ -4,10 +4,10 @@ metadata:
   name: proxmox-csi
 parameters:
   csi.storage.k8s.io/fstype: ext4
-  storage: local-lvm
+  storage: zfs-data
   cache: none
   ssd: "true"
 provisioner: csi.proxmox.sinextra.dev
 allowVolumeExpansion: true
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 volumeBindingMode: Immediate

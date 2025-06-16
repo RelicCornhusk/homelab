@@ -33,6 +33,11 @@ resource "proxmox_virtual_environment_vm" "this" {
     mac_address = each.value.mac_address
   }
 
+  # cdrom {
+    # file_id      = proxmox_virtual_environment_download_file.this["${each.value.host_node}_${var.image.version}"].id
+  #   interface         = "ide2"
+  # }
+
   disk {
     datastore_id = each.value.datastore_id
     interface    = "scsi0"
@@ -41,10 +46,11 @@ resource "proxmox_virtual_environment_vm" "this" {
     discard      = "on"
     ssd          = true
     file_format  = "raw"
-    size         = 20
-    file_id      = proxmox_virtual_environment_download_file.this["${each.value.host_node}_${each.value.update == true ? local.update_image_id : local.image_id}"].id
+    size         = 32
+    file_id      = proxmox_virtual_environment_download_file.this["${each.value.host_node}_${var.image.version}"].id
   }
 
+  # boot_order = ["scsi0", "ide2"]
   boot_order = ["scsi0"]
 
   operating_system {

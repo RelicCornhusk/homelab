@@ -1,5 +1,5 @@
 image = {
-  version         = "v1.7.5"
+  version   = "v1.7.5"
   schematic = file("schematic.yaml")
 }
 

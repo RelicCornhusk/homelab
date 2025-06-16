@@ -7,7 +7,7 @@ module "talos" {
   }
 
   image = {
-    version   = "v1.10.3"
+    version   = "v1.10.4"
     schematic = file("${path.module}/talos/image/schematic.yaml")
   }
 
@@ -18,9 +18,9 @@ module "talos" {
 
   cluster = {
     name            = "talos"
-    endpoint        = "192.168.18.23"
+    endpoint        = "192.168.18.30"
     gateway         = "192.168.18.1"
-    talos_version   = "v1.10.3"
+    talos_version   = "v1.10.4"
     proxmox_cluster = "homelab"
   }
 
@@ -28,12 +28,12 @@ module "talos" {
     "controlplane" = {
       host_node     = "magi"
       machine_type  = "controlplane"
-      ip            = "192.168.18.23"
-      mac_address   = "a8:b8:e0:04:fa:42"
+      ip            = "192.168.18.30"
+      mac_address   = "BC:24:11:6E:40:D6"
       vm_id         = 800
       cpu           = 4
-      ram_dedicated = 13722
-      ram_floating  = 8196
+      ram_dedicated = 10240
+      ram_floating  = 10240
       igpu          = true
     }
   }
@@ -48,8 +48,8 @@ module "sealed_secrets" {
   }
 
   cert = {
-    cert = var.sealed_secrets_cert
-    key  = var.sealed_secrets_key
+    cert = file("${path.module}/bootstrap/sealed-secrets/certificate/sealed-secrets.cert")
+    key  = file("${path.module}/bootstrap/sealed-secrets/certificate/sealed-secrets.key")
   }
 }
 
@@ -75,14 +75,17 @@ resource "helm_release" "argocd" {
   create_namespace = true
   set = [{
     name  = "configs.secret.argocdServerAdminPassword"
-    value = var.argocd.admin_password
-    }, {
-    name  = "configs.secret.argocdServerAdminPasswordMtime"
-    value = timestamp()
-  }]
+    value = bcrypt(var.argocd_admin_password)
+    }
+  ]
+  lifecycle {
+    ignore_changes = [
+      set
+    ]
+  }
 }
 
-
+# Create resource on a second apply - see https://discuss.hashicorp.com/t/depends-on-feature-is-not-working-properly-to-run-the-k8s-manifests-after-eks-cluster-creation/61716/2
 resource "kubernetes_manifest" "app_of_apps" {
   depends_on = [helm_release.argocd]
   manifest = {
@@ -92,7 +95,7 @@ resource "kubernetes_manifest" "app_of_apps" {
       "finalizers" = [
         "resources-finalizer.argocd.argoproj.io",
       ]
-      "name"      = "applications"
+      "name"      = "apps"
       "namespace" = "argocd"
     }
     "spec" = {
@@ -106,6 +109,12 @@ resource "kubernetes_manifest" "app_of_apps" {
         "repoURL"        = "https://github.com/RelicCornhusk/homelab.git"
         "targetRevision" = "HEAD"
       }
+      "syncPolicy" = {
+        automated = {
+          prune: true
+        }
+      }
     }
   }
 }
+
