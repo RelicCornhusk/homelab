@@ -36,6 +36,11 @@ resource "kubernetes_namespace" "csi-proxmox" {
       "pod-security.kubernetes.io/warn"    = "baseline"
     }
   }
+  lifecycle {
+    ignore_changes = [ 
+      metadata
+    ]
+  }
 }
 
 resource "kubernetes_secret" "proxmox-csi-plugin" {

@@ -76,16 +76,23 @@ resource "helm_release" "argocd" {
   set = [{
     name  = "configs.secret.argocdServerAdminPassword"
     value = bcrypt(var.argocd_admin_password)
+    },
+    # required for exposing server with Gateway API
+    {
+      name = "configs.params.server\\.insecure"
+      value = "true"
     }
   ]
   lifecycle {
     ignore_changes = [
-      set
+      set[0].value, # ignore changes to the password (needed for sensitive variable handling)
     ]
   }
 }
 
-# Create resource on a second apply - see https://discuss.hashicorp.com/t/depends-on-feature-is-not-working-properly-to-run-the-k8s-manifests-after-eks-cluster-creation/61716/2
+# Create this resource on a second apply 
+# See https://discuss.hashicorp.com/t/depends-on-feature-is-not-working-properly-to-run-the-k8s-manifests-after-eks-cluster-creation/61716/2
+
 resource "kubernetes_manifest" "app_of_apps" {
   depends_on = [helm_release.argocd]
   manifest = {
