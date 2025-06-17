@@ -8,10 +8,9 @@
 - map igpu device on proxmox
     - find PCI device for the integrated GPU using lspci
     - map it with the name "iGPU" 
-- create terraform api token on proxmox and update its permissions to be admin of root. Paste token to tfvars.
+- create terraform api token on proxmox and update its permissions to be admin of root. Paste token to tfvars/HCP Terraform.
 - run terraform apply
-- get and delete initial admin secret for argocd. Rotate password.
-
+- make sure the tailscale connector is advertising all routes on Tailscale Admin Console
 
 argocd app create apps \
     --dest-namespace argocd \
