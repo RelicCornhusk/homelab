@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: data-transfer
+  name: data-transfer
+  namespace: vitorflix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-transfer
+  template:
+    metadata:
+      labels:
+        app: data-transfer
+    spec:
+      containers:
+      - image: ghcr.io/linuxserver/openssh-server
+        name: data-transfer
+        command: ["/bin/sh"]
+        args: ["-c", "sleep infinity"]
+        volumeMounts:
+        - mountPath: /config-bazarr
+          name: config-bazarr
+        - mountPath: /config-prowlarr
+          name: config-prowlarr
+        - mountPath: /config-radarr
+          name: config-radarr
+        - mountPath: /config-sonarr
+          name: config-sonarr
+        - mountPath: /config-jellyseerr
+          name: config-jellyseerr
+        - mountPath: /config-jellyfin
+          name: config-jellyfin
+        - mountPath: /config-recyclarr
+          name: config-recyclarr
+        - mountPath: /config-qbittorrent
+          name: config-qbittorrent
+        - mountPath: /config-gluetun
+          name: config-gluetun
+      volumes:
+      - persistentVolumeClaim:
+          claimName: config-bazarr
+        name: config-bazarr
+      - persistentVolumeClaim:
+          claimName: config-prowlarr
+        name: config-prowlarr
+      - persistentVolumeClaim:
+          claimName: config-radarr
+        name: config-radarr
+      - persistentVolumeClaim:
+          claimName: config-sonarr
+        name: config-sonarr
+      - persistentVolumeClaim:
+          claimName: config-jellyseerr
+        name: config-jellyseerr
+      - persistentVolumeClaim:
+          claimName: config-jellyfin
+        name: config-jellyfin
+      - persistentVolumeClaim:
+          claimName: config-recyclarr
+        name: config-recyclarr
+      - persistentVolumeClaim:
+          claimName: config-qbittorrent
+        name: config-qbittorrent
+      - persistentVolumeClaim:
+          claimName: config-gluetun
+        name: config-gluetun

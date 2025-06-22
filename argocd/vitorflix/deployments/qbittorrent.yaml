@@ -93,7 +93,7 @@ spec:
         command: ["sh", "-c"]
         args:
         - |
-          mkdir -p /data/downloads &&
+          mkdir -p /data/torrents &&
           chown -R $PUID:$PGID /data &&
           exec /init
         ports:
