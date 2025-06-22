@@ -17,7 +17,7 @@ spec:
         app: data-transfer
     spec:
       containers:
-      - image: ghcr.io/linuxserver/openssh-server
+      - image: bitnami/minideb
         name: data-transfer
         command: ["/bin/sh"]
         args: ["-c", "sleep infinity"]
@@ -40,7 +40,12 @@ spec:
           name: config-qbittorrent
         - mountPath: /config-gluetun
           name: config-gluetun
+        - mountPath: /data
+          name: data
       volumes:
+      - persistentVolumeClaim:
+          claimName: data
+        name: data
       - persistentVolumeClaim:
           claimName: config-bazarr
         name: config-bazarr
