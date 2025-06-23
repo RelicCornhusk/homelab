@@ -26,9 +26,9 @@ spec:
               gpu.intel.com/i915: 1000m
         env:
         - name: PUID
-          value: "1"
+          value: "1000"
         - name: PGID
-          value: "1"
+          value: "1000"
         volumeMounts:
         - mountPath: /data
           name: data
