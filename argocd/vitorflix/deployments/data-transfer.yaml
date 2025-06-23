@@ -16,6 +16,7 @@ spec:
       labels:
         app: data-transfer
     spec:
+      replicas: 1
       containers:
       - image: bitnami/minideb
         name: data-transfer
