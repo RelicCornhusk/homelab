@@ -28,7 +28,6 @@ spec:
         args:
         - |
           mkdir -p /data/media/tv &&
-          chown -R $PUID:$PGID /data &&
           exec /init
         volumeMounts:
         - mountPath: /data

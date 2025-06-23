@@ -31,7 +31,7 @@ spec:
         args:
         - |
           mkdir -p /data/media/movies &&
-          chown -R $PUID:$PGID /data &&
+          R $PUID:$PGID /data &&
           exec /init
         volumeMounts:
         - mountPath: /data
