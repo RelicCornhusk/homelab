@@ -94,7 +94,6 @@ spec:
         args:
         - |
           mkdir -p /data/torrents &&
-          R $PUID:$PGID /data &&
           exec /init
         ports:
         - containerPort: 8080
