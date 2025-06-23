@@ -24,16 +24,16 @@ spec:
         resources:
             limits:
               gpu.intel.com/i915: 1000m
+        env:
+        - name: PUID
+          value: "1"
+        - name: PGID
+          value: "1"
         volumeMounts:
         - mountPath: /data
           name: data
         - mountPath: /config
           name: config-jellyfin
-        - env:
-          - name: PUID
-            value: "1"
-          - name: PGID
-            value: "1"
       volumes:
       - persistentVolumeClaim:
           claimName: data
