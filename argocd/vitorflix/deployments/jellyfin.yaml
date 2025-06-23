@@ -29,6 +29,11 @@ spec:
           name: data
         - mountPath: /config
           name: config-jellyfin
+        - env:
+          - name: PUID
+            value: "1"
+          - name: PGID
+            value: "1"
       volumes:
       - persistentVolumeClaim:
           claimName: data
