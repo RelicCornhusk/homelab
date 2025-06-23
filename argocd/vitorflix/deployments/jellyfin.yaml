@@ -34,6 +34,8 @@ spec:
           name: data
         - mountPath: /config
           name: config-jellyfin
+        ports:
+        - containerPort: 8096
       volumes:
       - persistentVolumeClaim:
           claimName: data
