@@ -8,7 +8,7 @@ spec:
     - name: cilium-gateway
       namespace: gateway
   hostnames:
-    - "downloadsconfigs.params.server.insecure.vitorflix.club"
+    - "downloads.vitorflix.club"
   rules:
     - matches:
         - path:
