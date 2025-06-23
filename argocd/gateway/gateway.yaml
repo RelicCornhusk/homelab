@@ -14,7 +14,7 @@ spec:
     - protocol: HTTPS
       port: 443
       name: https-gateway
-      hostname: "*.test.vitormuzzi.dev"
+      hostname: "*.vitorflix.club"
       tls:
         certificateRefs:
           - kind: Secret

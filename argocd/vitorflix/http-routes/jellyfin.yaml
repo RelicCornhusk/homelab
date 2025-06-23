@@ -8,7 +8,7 @@ spec:
     - name: cilium-gateway
       namespace: gateway
   hostnames:
-    - "test.vitormuzzi.dev"
+    - "vitorflix.club"
   rules:
     - matches:
         - path:
