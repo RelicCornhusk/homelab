@@ -7,7 +7,7 @@ metadata:
   name: data-transfer
   namespace: vitorflix
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: data-transfer
@@ -16,12 +16,11 @@ spec:
       labels:
         app: data-transfer
     spec:
-      replicas: 2
       containers:
       - image: bitnami/minideb
         name: data-transfer
         command: ["/bin/sh"]
-        args: ["-c", "sleep infinity"]
+        args: ["-c", "apt update && apt install -y openssh-client && sleep infinity"]
         volumeMounts:
         - mountPath: /config-bazarr
           name: config-bazarr
@@ -37,8 +36,10 @@ spec:
           name: config-jellyfin
         - mountPath: /config-recyclarr
           name: config-recyclarr
-        - mountPath: /config-qbittorrent
+        - mountpath: /config-qbittorrent
           name: config-qbittorrent
+        - mountpath: /config-qbitmanage
+          name: config-qbitmanage
         - mountPath: /config-gluetun
           name: config-gluetun
         - mountPath: /data
@@ -71,6 +72,9 @@ spec:
       - persistentVolumeClaim:
           claimName: config-qbittorrent
         name: config-qbittorrent
+      - persistentVolumeClaim:
+          claimName: config-qbitmanage
+        name: config-qbitmanage
       - persistentVolumeClaim:
           claimName: config-gluetun
         name: config-gluetun

@@ -108,105 +108,76 @@ spec:
           name: config-qbittorrent
         - mountPath: /data
           name: data
-      # - image: patrickaclark/qbittorrent-port-manager:latest
-      #   name: qbittorrent-port-manager
-      #   resources: {}
-      #   securityContext:
-      #     capabilities:
-      #       drop:
-      #       - CAP_MKNOD
-      #       - CAP_NET_RAW
-      #       - CAP_AUDIT_WRITE
-      #   volumeMounts:
-      #   - mountPath: /tmp/gluetun
-      #     name: docker-config-gluetun-tmp-host-0
-      #   - mountPath: /qbit-healthcheck.sh
-      #     name: qbit-healthcheck-sh-host-1
-      # - env:
-      #   - name: QBT_TAG_UPDATE
-      #     value: "false"
-      #   - name: QBT_REM_ORPHANED
-      #     value: "true"
-      #   - name: QBT_REM_UNREGISTERED
-      #     value: "false"
-      #   - name: QBT_DIVIDER
-      #     value: =
-      #   - name: QBT_LOGFILE
-      #     value: activity.log
-      #   - name: QBT_CONFIG
-      #     value: config.yml
-      #   - name: QBT_WIDTH
-      #     value: "100"
-      #   - name: QBT_TAG_TRACKER_ERROR
-      #     value: "false"
-      #   - name: QBT_SKIP_CLEANUP
-      #     value: "false"
-      #   - name: QBT_CAT_UPDATE
-      #     value: "true"
-      #   - name: QBT_LOG_LEVEL
-      #     value: INFO
-      #   - name: QBT_DRY_RUN
-      #     value: "false"
-      #   - name: QBT_CROSS_SEED
-      #     value: "false"
-      #   - name: QBT_RECHECK
-      #     value: "false"
-      #   - name: QBT_RUN
-      #     value: "false"
-      #   - name: QBT_TAG_NOHARDLINKS
-      #     value: "true"
-      #   - name: QBT_SCHEDULE
-      #     value: "30"
-      #   image: docker.io/bobokun/qbit_manage:latest
-      #   name: qbitmanage
-      #   securityContext:
-      #     capabilities:
-      #       drop:
-      #       - CAP_MKNOD
-      #       - CAP_NET_RAW
-      #       - CAP_AUDIT_WRITE
-      #   volumeMounts:
-      #   - mountPath: /config
-      #     name: docker-config-qbit-manage-host-0
-      #   - mountPath: /data
-      #     name: data-host-1
-      # enableServiceLinks: false
-      # hostname: gluetun
+
+      - name: qbittorrent-port-manager
+        image: patrickaclark/qbittorrent-port-manager:latest
+        env: 
+        - name: BITTORRENT_SERVER
+          value: "localhost"
+        - name: QBITTORRENT_PORT
+          value: "8080"
+        - name: HTTP_S
+          value: "http"
+        - name: GLUETUN_HOST
+          value: "localhost"
+        - name: GLUETUN_PORT
+          value: "8000"
+        - name: RECHECK_TIME
+          value: "60"     
+
+      - name: qbitmanage
+        image: docker.io/bobokun/qbit_manage:latest
+        env:
+        - name: QBT_TAG_UPDATE
+          value: "false"
+        - name: QBT_REM_ORPHANED
+          value: "true"
+        - name: QBT_REM_UNREGISTERED
+          value: "false"
+        - name: QBT_DIVIDER
+          value: =
+        - name: QBT_LOGFILE
+          value: activity.log
+        - name: QBT_CONFIG
+          value: config.yml
+        - name: QBT_WIDTH
+          value: "100"
+        - name: QBT_TAG_TRACKER_ERROR
+          value: "false"
+        - name: QBT_SKIP_CLEANUP
+          value: "false"
+        - name: QBT_CAT_UPDATE
+          value: "true"
+        - name: QBT_LOG_LEVEL
+          value: INFO
+        - name: QBT_DRY_RUN
+          value: "false"
+        - name: QBT_CROSS_SEED
+          value: "false"
+        - name: QBT_RECHECK
+          value: "false"
+        - name: QBT_RUN
+          value: "false"
+        - name: QBT_TAG_NOHARDLINKS
+          value: "true"
+        - name: QBT_SCHEDULE
+          value: "30"
+        volumeMounts:
+        - mountPath: /config
+          name: config-qbitmanage
+        - mountPath: /data
+          name: data
       volumes:
       - persistentVolumeClaim:
           claimName: data
         name: data
+      - persistentVolumeClaim:
+          claimName: config-qbitmanage
+        name: config-qbitmanage
       - persistentVolumeClaim:
           claimName: config-qbittorrent
         name: config-qbittorrent
       - persistentVolumeClaim:
           claimName: config-gluetun
         name: config-gluetun
-      # - hostPath:
-      #     path: /docker/config/gluetun-tmp
-      #     type: Directory
-      #   name: docker-config-gluetun-tmp-host-0
-      # - hostPath:
-      #     path: /home/podman/docker-projects/media-services/qbit-healthcheck.sh
-      #     type: Directory
-      #   name: qbit-healthcheck-sh-host-1
-      # - hostPath:
-      #     path: /docker/config/gluetun
-      #     type: Directory
-      #   name: docker-config-gluetun-host-0
-      # - hostPath:
-      #     path: /docker/config/gluetun-tmp
-      #     type: Directory
-      #   name: docker-config-gluetun-tmp-host-1
-      # - hostPath:
-      #     path: /docker/config/qbittorrent
-      #     type: Directory
-      #   name: docker-config-qbittorrent-host-0
-      # - hostPath:
-      #     path: /docker/config/qbit-manage
-      #     type: Directory
-      #   name: docker-config-qbit-manage-host-0
-      # - hostPath:
-      #     path: /data
-      #     type: Directory
-      #   name: data-host-1
+      
