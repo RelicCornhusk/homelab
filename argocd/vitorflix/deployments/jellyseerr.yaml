@@ -24,7 +24,7 @@ spec:
         - name: TZ
           value: America/Toronto
         volumeMounts:
-        - mountPath: /config
+        - mountPath: /app/config
           name: config-jellyseerr
         ports:
         - containerPort: 5055
