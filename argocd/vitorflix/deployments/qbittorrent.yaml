@@ -17,33 +17,9 @@ spec:
         app: qbittorrent
     spec:
       containers:
-      # - image: localhost/jelly-qbit-toggle:latest
-      #   name: media-servicesjelly-qbit-toggle1
-      #   ports:
-      #   - containerPort: 5000
-      #     hostPort: 5000
-      #   - containerPort: 6881
-      #     hostPort: 6881
-      #   - containerPort: 8080
-      #     hostPort: 8080
-      #   - containerPort: 8388
-      #     hostPort: 8388
-      #   - containerPort: 8888
-      #     hostPort: 8888
-      #   - containerPort: 6881
-      #     hostPort: 6881
-      #     protocol: UDP
-      #   - containerPort: 8388
-      #     hostPort: 8388
-      #     protocol: UDP
-      #   resources: {}
-      #   securityContext:
-      #     capabilities:
-      #       drop:
-      #       - CAP_MKNOD
-      #       - CAP_NET_RAW
-      #       - CAP_AUDIT_WRITE
-      - env:
+      - name: gluetun
+        image: docker.io/qmcgaw/gluetun:latest
+        env:
         - name: FIREWALL_INPUT_PORTS
           value: "8080"
         - name: DOT
@@ -58,6 +34,8 @@ spec:
           value: "on"
         - name: VPN_PORT_FORWARDING
           value: "on"
+        - name: VPN_PORT_FORWARDING_UP_COMMAND
+          value: /bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'
         - name: OPENVPN_USER
           valueFrom:
             secretKeyRef:
@@ -68,15 +46,11 @@ spec:
             secretKeyRef:
               name: openvpn-auth
               key: openvpn-password
-        image: docker.io/qmcgaw/gluetun:latest
-        name: gluetun
         resources: {}
         securityContext:
           privileged: true
         volumeMounts:
         - mountPath: /gluetun
-          name: config-gluetun
-        - mountPath: /tmp/gluetun
           name: config-gluetun
       - name: qbittorrent
         env:
@@ -109,21 +83,22 @@ spec:
         - mountPath: /data
           name: data
 
-      - name: qbittorrent-port-manager
-        image: patrickaclark/qbittorrent-port-manager:latest
-        env: 
-        - name: BITTORRENT_SERVER
-          value: "localhost"
-        - name: QBITTORRENT_PORT
-          value: "8080"
-        - name: HTTP_S
-          value: "http"
-        - name: GLUETUN_HOST
-          value: "localhost"
-        - name: GLUETUN_PORT
-          value: "8000"
-        - name: RECHECK_TIME
-          value: "60"     
+      # No longer needed if using custom VPN_PORT_FORWARDING_UP_COMMAND
+      # - name: qbittorrent-port-manager
+      #   image: patrickaclark/qbittorrent-port-manager:latest
+      #   env: 
+      #   - name: BITTORRENT_SERVER
+      #     value: "localhost"
+      #   - name: QBITTORRENT_PORT
+      #     value: "8080"
+      #   - name: HTTP_S
+      #     value: "http"
+      #   - name: GLUETUN_HOST
+      #     value: "localhost"
+      #   - name: GLUETUN_PORT
+      #     value: "8000"
+      #   - name: RECHECK_TIME
+      #     value: "60"     
 
       - name: qbitmanage
         image: docker.io/bobokun/qbit_manage:latest
@@ -167,6 +142,32 @@ spec:
           name: config-qbitmanage
         - mountPath: /data
           name: data
+      # - image: localhost/jelly-qbit-toggle:latest
+      #   name: media-servicesjelly-qbit-toggle1
+      #   ports:
+      #   - containerPort: 5000
+      #     hostPort: 5000
+      #   - containerPort: 6881
+      #     hostPort: 6881
+      #   - containerPort: 8080
+      #     hostPort: 8080
+      #   - containerPort: 8388
+      #     hostPort: 8388
+      #   - containerPort: 8888
+      #     hostPort: 8888
+      #   - containerPort: 6881
+      #     hostPort: 6881
+      #     protocol: UDP
+      #   - containerPort: 8388
+      #     hostPort: 8388
+      #     protocol: UDP
+      #   resources: {}
+      #   securityContext:
+      #     capabilities:
+      #       drop:
+      #       - CAP_MKNOD
+      #       - CAP_NET_RAW
+      #       - CAP_AUDIT_WRITE
       volumes:
       - persistentVolumeClaim:
           claimName: data
