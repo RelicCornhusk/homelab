@@ -35,9 +35,9 @@ spec:
           name: config-jellyfin
         - mountPath: /config-recyclarr
           name: config-recyclarr
-        - mountpath: /config-qbittorrent
+        - mountPath: /config-qbittorrent
           name: config-qbittorrent
-        - mountpath: /config-qbitmanage
+        - mountPath: /config-qbitmanage
           name: config-qbitmanage
         - mountPath: /config-gluetun
           name: config-gluetun
