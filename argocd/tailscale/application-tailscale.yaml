@@ -12,6 +12,10 @@ spec:
     repoURL: https://pkgs.tailscale.com/helmcharts
     targetRevision: 1.80.3
     chart: tailscale-operator
+    helm:
+      values: |
+        apiServerProxyConfig:
+          mode: "true"
   sources: []
   project: default
   syncPolicy:
