@@ -18,8 +18,8 @@ module "talos" {
 
   cluster = {
     name            = "talos"
-    endpoint        = "192.168.18.30"
-    gateway         = "192.168.18.1"
+    endpoint        = "10.0.0.241"
+    gateway         = "10.0.0.1"
     talos_version   = "v1.10.4"
     proxmox_cluster = "homelab"
   }
@@ -28,7 +28,7 @@ module "talos" {
     "controlplane" = {
       host_node     = "magi"
       machine_type  = "controlplane"
-      ip            = "192.168.18.30"
+      ip            = "10.0.0.241"
       mac_address   = "BC:24:11:6E:40:D6"
       vm_id         = 800
       cpu           = 4
@@ -65,36 +65,39 @@ module "proxmox_csi_plugin" {
   proxmox = var.proxmox
 }
 
-resource "helm_release" "argocd" {
-  depends_on       = [module.talos]
-  name             = "argocd"
-  repository       = "https://argoproj.github.io/argo-helm"
-  chart            = "argo-cd"
-  namespace        = "argocd"
-  version          = "8.0.14"
-  create_namespace = true
-  set = [{
-    name  = "configs.secret.argocdServerAdminPassword"
-    value = bcrypt(var.argocd_admin_password)
-    },
-    # required for exposing server with Gateway API
-    {
-      name = "configs.params.server\\.insecure"
-      value = "true"
-    }
-  ]
-  lifecycle {
-    ignore_changes = [
-      set[0].value, # ignore changes to the password (needed for sensitive variable handling)
-    ]
-  }
-}
+# commenting out since it's not in state and I can't import right now
+# resource "helm_release" "argocd" {
+#   depends_on       = [module.talos]
+#   name             = "argocd"
+#   repository       = "https://argoproj.github.io/argo-helm"
+#   chart            = "argo-cd"
+#   namespace        = "argocd"
+#   version          = "8.0.14"
+#   create_namespace = true
+#   set = [{
+#     name  = "configs.secret.argocdServerAdminPassword"
+#     value = bcrypt(var.argocd_admin_password)
+#     },
+#     # required for exposing server with Gateway API
+#     {
+#       name = "configs.params.server\\.insecure"
+#       value = "true"
+#     }
+#   ]
+#   lifecycle {
+#     ignore_changes = [
+#       set[0].value, # ignore changes to the password (needed for sensitive variable handling)
+#     ]
+#   }
+# }
+
+
 
 # Create this resource on a second apply 
 # See https://discuss.hashicorp.com/t/depends-on-feature-is-not-working-properly-to-run-the-k8s-manifests-after-eks-cluster-creation/61716/2
 
 resource "kubernetes_manifest" "app_of_apps" {
-  depends_on = [helm_release.argocd]
+  # depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "argoproj.io/v1alpha1"
     "kind"       = "Application"
