@@ -21,7 +21,27 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: config-recyclarr
+        - mountPath: /config/configs/sonarr.yaml
+          name: configmap-recyclarr
+          subPath: sonarr.yaml
+        - mountPath: /config/configs/radarr.yaml
+          name: configmap-recyclarr
+          subPath: radarr.yaml
+        env:
+        - name: SONARR_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: vitorflix-api-keys
+              key: SONARR_API_KEY
+        - name: RADARR_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: vitorflix-api-keys
+              key: RADARR_API_KEY
       volumes:
+      - configMap:
+          name: recyclarr-configs
+        name: recyclarr
       - persistentVolumeClaim:
           claimName: config-recyclarr
         name: config-recyclarr
