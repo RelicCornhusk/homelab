@@ -22,10 +22,10 @@ spec:
         - mountPath: /config
           name: config-recyclarr
         - mountPath: /config/configs/sonarr.yaml
-          name: configmap-recyclarr
+          name: recyclarr-configs
           subPath: sonarr.yaml
         - mountPath: /config/configs/radarr.yaml
-          name: configmap-recyclarr
+          name: recyclarr-configs
           subPath: radarr.yaml
         env:
         - name: SONARR_API_KEY
