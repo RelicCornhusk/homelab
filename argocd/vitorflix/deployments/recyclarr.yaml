@@ -32,12 +32,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: vitorflix-api-keys
-              key: SONARR_API_KEY
+              key: sonarr
         - name: RADARR_API_KEY
           valueFrom:
             secretKeyRef:
               name: vitorflix-api-keys
-              key: RADARR_API_KEY
+              key: radarr
       volumes:
       - configMap:
           name: recyclarr-configs
