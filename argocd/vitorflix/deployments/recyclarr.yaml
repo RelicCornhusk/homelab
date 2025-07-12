@@ -41,7 +41,7 @@ spec:
       volumes:
       - configMap:
           name: recyclarr-configs
-        name: recyclarr
+        name: recyclarr-configs
       - persistentVolumeClaim:
           claimName: config-recyclarr
         name: config-recyclarr
