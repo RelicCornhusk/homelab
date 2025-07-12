@@ -19,7 +19,7 @@ spec:
       - image: bitnami/minideb
         name: data-transfer
         command: ["/bin/sh"]
-        args: ["-c", "apt update && apt install -y openssh-client && sleep infinity"]
+        args: ["-c", "apt update && apt install -y openssh-client vim && sleep infinity"]
         volumeMounts:
         - mountPath: /config-bazarr
           name: config-bazarr

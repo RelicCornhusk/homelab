@@ -18,9 +18,9 @@ spec:
       containers:
       - image: ghcr.io/recyclarr/recyclarr:7.4.1
         name: recyclarr
-      volumeMounts:
-      - mountPath: /config
-        name: config-recyclarr
+        volumeMounts:
+        - mountPath: /config
+          name: config-recyclarr
       volumes:
       - persistentVolumeClaim:
           claimName: config-recyclarr
