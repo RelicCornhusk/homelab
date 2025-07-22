@@ -30,6 +30,8 @@ spec:
           value: protonvpn
         - name: PORT_FORWARD_ONLY
           value: "on"
+        - name: UPDATER_PERIOD
+          value: "24h"
         - name: VPN_PORT_FORWARDING
           value: "on"
         - name: VPN_PORT_FORWARDING_UP_COMMAND
