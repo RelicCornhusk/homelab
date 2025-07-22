@@ -26,8 +26,6 @@ spec:
           value: "off"
         # - name: FIREWALL_DEBUG
         #   value: "on"
-        - name: SERVER_COUNTRIES
-          value: canada
         - name: VPN_SERVICE_PROVIDER
           value: protonvpn
         - name: PORT_FORWARD_ONLY
@@ -36,16 +34,25 @@ spec:
           value: "on"
         - name: VPN_PORT_FORWARDING_UP_COMMAND
           value: /bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'
-        - name: OPENVPN_USER
+        - name: VPN_TYPE
+          value: wireguard
+        - name: WIREGUARD_PRIVATE_KEY
           valueFrom:
             secretKeyRef:
-              name: openvpn-auth
-              key: openvpn-user 
-        - name: OPENVPN_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: openvpn-auth
-              key: openvpn-password
+              name: protonvpn-wireguard
+              key: private-key
+        # - name: SERVER_COUNTRIES
+        #   value: canada
+        # - name: OPENVPN_USER
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: openvpn-auth
+        #       key: openvpn-user 
+        # - name: OPENVPN_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: openvpn-auth
+        #       key: openvpn-password
         resources: {}
         securityContext:
           privileged: true

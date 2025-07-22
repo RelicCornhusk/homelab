@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: protonvpn-wireguard
+  namespace: vitorflix
+spec:
+  encryptedData:
+    private-key: AgAbirN4W3SjKepPILcto3anxPB2pS9rqsqORs9NM4vFYE6ArBIm2VtewEun23irTsBDvw76Kk2rLm8UWqekKKL8oTWvMbVezHdPvpnUMoEuDxHMdrjt7ON/OiHHVIMhwPOwNeV1OJUfGdV3mmuLpc1Bi2VW9LHiV+mD2CaNCOdjGc18AaOVBNTQRbLss4ShT1H4Rj2cDlY7Goc87Otb/NgUP+jaDlhfXOpSk81ZCxlt1x1Y/7vQggY/0lIgbJvbKw4dOOz4PA6Z55jRcektmADGYj3E817ImqW41OLR1zdleVc+qYUZYhDQM+kgkY8VUA1E1h7eOLOoRPFisTRGCahioLYPoEZQ/bMYRyDw0ySRRQqgqCxDSNzXuni/WjKFg11Xa4AjqqwyaBWx5CeH6yUSCGcMQ2ZjvG0RcluKcCrmMX67wGDwvaBFpsqSL/RMKvPN1VBfFsQpDER1S4UB2oqUw1TrKia3pDxooM/7W5KVzEGzXEGdGYULW0+d/VZrZI3yaAsGwzRM6CNwvS2OuKi/2FdGxc6vbsYDjaALmpJ9GJHMv1INPCms3Z4Z/vtdTIb0wEBvv7J9E81FMkRpdlY+Zbm1Tie6unz6TFPu/qwolPC4XEej5pPvtQrvxNL9txas6dVjk73IiPcseKyrk1ZKau0Jcze0NpUT5QluCf2gRZWSCEliXFvF2GXHnZgDCxS+25Nu/GPAiG58x2EsEoYxb2vC/0zhp9A9pyaJXpQty+X47RJrvDs9UysF2w==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: protonvpn-wireguard
+      namespace: vitorflix
