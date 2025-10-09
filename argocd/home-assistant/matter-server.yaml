@@ -11,20 +11,11 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    io.containers.autoupdate : "registry"
-    io.kubernetes.cri-o.TTY/matter-server: "false"
-    io.podman.annotations.apparmor/matter-server: unconfined
-    io.podman.annotations.autoremove/matter-server: "FALSE"
-    io.podman.annotations.init/matter-server: "FALSE"
-    io.podman.annotations.privileged/matter-server: "FALSE"
-    io.podman.annotations.publish-all/matter-server: "FALSE"
-  creationTimestamp: "2024-12-24T19:30:04Z"
   labels:
-    app: matter-server-pod
-  name: matter-server-pod
+    app: matter-server
+  name: matter-server
 spec:
   restartPolicy: Always
-  automountServiceAccountToken: false
   containers:
   - args:
     - --storage-path
@@ -33,27 +24,17 @@ spec:
     - /data/credentials
     image: ghcr.io/home-assistant-libs/python-matter-server:stable
     name: matter-server
-    securityContext:
-      capabilities:
-        drop:
-        - CAP_MKNOD
-        - CAP_NET_RAW
-        - CAP_AUDIT_WRITE
     volumeMounts:
-    - mountPath: /run/dbus
-      name: run-dbus-host-0
-      readOnly: true
+    # - mountPath: /run/dbus
+    #   name: run-dbus-host-0
+      # readOnly: true
     - mountPath: /data
-      name: docker-appdata-homeassistant_matter_server-host-1
-  enableServiceLinks: false
-  hostNetwork: true
-  hostname: media-server
+      name: config-matter-server
   volumes:
-  - hostPath:
-      path: /run/dbus
-      type: Directory
-    name: run-dbus-host-0
-  - hostPath:
-      path: /docker/appdata/homeassistant_matter_server
-      type: Directory
-    name: docker-appdata-homeassistant_matter_server-host-1
+  # - hostPath:
+  #     path: /run/dbus
+  #     type: Directory
+  #   name: run-dbus-host-0
+  - persistentVolumeClaim:
+      claimName: config-matter-server
+    name: config-matter-server
