@@ -28,8 +28,6 @@ spec:
         # - mountPath: /run/dbus
         #   name: run-dbus-host-1
         #   readOnly: true
-      enableServiceLinks: false
-      hostNetwork: true
       volumes:
       - persistentVolumeClaim:
           claimName: config-home-assistant
