@@ -14,8 +14,6 @@ metadata:
     app: home-assistant
   name: home-assistant
 spec:
-  restartPolicy: Always
-  automountServiceAccountToken: false
   containers:
   - env:
     - name: TZ
@@ -26,18 +24,17 @@ spec:
       privileged: true
     volumeMounts:
     - mountPath: /config
-      name: docker-appdata-home-assistant-host-0
-    - mountPath: /run/dbus
-      name: run-dbus-host-1
-      readOnly: true
+      name: config-home-assistant
+    # - mountPath: /run/dbus
+    #   name: run-dbus-host-1
+    #   readOnly: true
   enableServiceLinks: false
   hostNetwork: true
   volumes:
-  - hostPath:
-      path: /docker/appdata/home-assistant
-      type: Directory
-    name: docker-appdata-home-assistant-host-0
-  - hostPath:
-      path: /run/dbus
-      type: Directory
-    name: run-dbus-host-1
+  - persistentVolumeClaim:
+      claimName: config-home-assistant
+    name: config-home-assistant
+  # - hostPath:
+  #     path: /run/dbus
+  #     type: Directory
+  #   name: run-dbus-host-1
