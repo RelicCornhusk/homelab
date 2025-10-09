@@ -1,40 +1,40 @@
-# Save the output of this file and use kubectl create -f to import
-# it into Kubernetes.
-#
-# Created with podman-4.3.1
-
-# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
-# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
-# has the right permissions to access the volumes added.
----
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   labels:
     app: home-assistant
   name: home-assistant
 spec:
-  containers:
-  - env:
-    - name: TZ
-      value: America/Toronto
-    image: ghcr.io/home-assistant/home-assistant:stable
-    name: home-assistant
-    securityContext:
-      privileged: true
-    volumeMounts:
-    - mountPath: /config
-      name: config-home-assistant
-    # - mountPath: /run/dbus
-    #   name: run-dbus-host-1
-    #   readOnly: true
-  enableServiceLinks: false
-  hostNetwork: true
-  volumes:
-  - persistentVolumeClaim:
-      claimName: config-home-assistant
-    name: config-home-assistant
-  # - hostPath:
-  #     path: /run/dbus
-  #     type: Directory
-  #   name: run-dbus-host-1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: America/Toronto
+        image: ghcr.io/home-assistant/home-assistant:stable
+        name: home-assistant
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /config
+          name: config-home-assistant
+        # - mountPath: /run/dbus
+        #   name: run-dbus-host-1
+        #   readOnly: true
+      enableServiceLinks: false
+      hostNetwork: true
+      volumes:
+      - persistentVolumeClaim:
+          claimName: config-home-assistant
+        name: config-home-assistant
+      # - hostPath:
+      #     path: /run/dbus
+      #     type: Directory
+      #   name: run-dbus-host-1
