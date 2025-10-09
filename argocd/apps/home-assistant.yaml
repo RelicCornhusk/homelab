@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: home-assistant
+  namespace: argocd
+spec:
+  destination:
+    namespace: home-assistant
+    server: https://kubernetes.default.svc
+  source:
+    path: argocd/home-assistant
+    repoURL: https://github.com/RelicCornhusk/homelab.git
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
