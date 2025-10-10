@@ -15,6 +15,7 @@ spec:
         app: matter-server
     spec:
       restartPolicy: Always
+      hostNetwork: true
       containers:
       - name: matter-server
         image: ghcr.io/home-assistant-libs/python-matter-server:stable
