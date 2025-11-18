@@ -22,14 +22,3 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    - protocol: HTTPS
-      port: 443
-      name: https-gateway-vitorflix-subdomains
-      hostname: "*.vitorflix.club"
-      tls:
-        certificateRefs:
-          - kind: Secret
-            name: cloudflare-cert
-      allowedRoutes:
-        namespaces:
-          from: All
