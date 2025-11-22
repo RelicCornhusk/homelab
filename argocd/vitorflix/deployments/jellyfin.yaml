@@ -19,7 +19,7 @@ spec:
         app: jellyfin
     spec:
       containers:
-      - image: lscr.io/linuxserver/jellyfin:latest
+      - image: lscr.io/linuxserver/jellyfin:10.11.3
         name: jellyfin
         resources:
             limits:
