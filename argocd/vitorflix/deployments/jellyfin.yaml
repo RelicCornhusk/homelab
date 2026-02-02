@@ -20,6 +20,7 @@ spec:
     spec:
       containers:
       - image: lscr.io/linuxserver/jellyfin:10.11.4
+        imagePullPolicy: Always
         name: jellyfin
         resources:
             limits:
