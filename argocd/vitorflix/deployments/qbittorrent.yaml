@@ -117,7 +117,7 @@ spec:
       #     value: "60"     
 
       - name: qbitmanage
-        image: docker.io/bobokun/qbit_manage:4.6.5
+        image: docker.io/bobokun/qbit_manage:v4.6.5
         imagePullPolicy: Always
         env:
         - name: QBT_TAG_UPDATE
