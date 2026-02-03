@@ -17,9 +17,12 @@ spec:
       labels:
         app: qbittorrent
     spec:
+      securityContext:
+        seccompProfile:
+          type: Unconfined
       containers:
       - name: gluetun
-        image: docker.io/qmcgaw/gluetun:latest
+        image: docker.io/qmcgaw/gluetun:v3
         imagePullPolicy: Always
         env:
         - name: FIREWALL_INPUT_PORTS
@@ -77,7 +80,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: lscr.io/linuxserver/qbittorrent:5.1.4 ## using this version for qbit_manage compatibility
+        image: lscr.io/linuxserver/qbittorrent:5.1.2 ## using this version for qbit_manage compatibility
         imagePullPolicy: Always
         resources: {}
         command: ["sh", "-c"]
@@ -117,7 +120,7 @@ spec:
       #     value: "60"     
 
       - name: qbitmanage
-        image: ghcr.io/stuffanthings/qbit_manage:v4.6.5
+        image: ghcr.io/stuffanthings/qbit_manage:v4.6.4
         imagePullPolicy: Always
         env:
         - name: QBT_TAG_UPDATE
