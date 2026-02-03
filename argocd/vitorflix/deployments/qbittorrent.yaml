@@ -76,7 +76,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: lscr.io/linuxserver/qbittorrent:5.0.3 ## using this version for qbit_manage compatibility
+        image: lscr.io/linuxserver/qbittorrent:5.1.4 ## using this version for qbit_manage compatibility
         resources: {}
         command: ["sh", "-c"]
         args:
@@ -115,7 +115,7 @@ spec:
       #     value: "60"     
 
       - name: qbitmanage
-        image: docker.io/bobokun/qbit_manage:latest
+        image: docker.io/bobokun/qbit_manage:4.6.5
         env:
         - name: QBT_TAG_UPDATE
           value: "false"

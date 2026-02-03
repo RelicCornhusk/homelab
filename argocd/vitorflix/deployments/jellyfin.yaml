@@ -19,12 +19,17 @@ spec:
         app: jellyfin
     spec:
       containers:
-      - image: lscr.io/linuxserver/jellyfin:10.11.4
+      - image: lscr.io/linuxserver/jellyfin:10.11.6
         imagePullPolicy: Always
         name: jellyfin
         resources:
-            limits:
-              gpu.intel.com/i915: 1000m
+          requests:
+            cpu: 1000m
+            memory: 2Gi
+          limits:
+            cpu: 4000m
+            memory: 8Gi
+            gpu.intel.com/i915: 1000m
         env:
         - name: PUID
           value: "1"
