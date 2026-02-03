@@ -20,6 +20,7 @@ spec:
       containers:
       - name: gluetun
         image: docker.io/qmcgaw/gluetun:latest
+        imagePullPolicy: Always
         env:
         - name: FIREWALL_INPUT_PORTS
           value: "8080"
@@ -77,6 +78,7 @@ spec:
         - name: PGID
           value: "1000"
         image: lscr.io/linuxserver/qbittorrent:5.1.4 ## using this version for qbit_manage compatibility
+        imagePullPolicy: Always
         resources: {}
         command: ["sh", "-c"]
         args:
@@ -116,6 +118,7 @@ spec:
 
       - name: qbitmanage
         image: docker.io/bobokun/qbit_manage:4.6.5
+        imagePullPolicy: Always
         env:
         - name: QBT_TAG_UPDATE
           value: "false"
