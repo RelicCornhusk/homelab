@@ -19,7 +19,7 @@ spec:
         app: bazarr
     spec:
       containers:
-      - image: ghcr.io/linuxserver/bazarr:1.5.2
+      - image: ghcr.io/linuxserver/bazarr:1.5.5
         name: bazarr
         resources: {}
         env:
