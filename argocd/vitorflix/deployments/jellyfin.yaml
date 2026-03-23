@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: jellyfin
   name: jellyfin
@@ -11,10 +10,8 @@ spec:
   selector:
     matchLabels:
       app: jellyfin
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: jellyfin
     spec:
@@ -25,10 +22,10 @@ spec:
         resources:
           requests:
             cpu: 1000m
-            memory: 2Gi
+            memory: 1Gi
           limits:
             cpu: 4000m
-            memory: 8Gi
+            memory: 4Gi # Lowered to prevent OOM conflicts with the qBittorrent cache
             gpu.intel.com/i915: 1000m
         env:
         - name: PUID
@@ -40,6 +37,8 @@ spec:
           name: data
         - mountPath: /config
           name: config-jellyfin
+        - mountPath: /transcode
+          name: transcode-cache
         ports:
         - containerPort: 8096
       volumes:
@@ -49,4 +48,7 @@ spec:
       - persistentVolumeClaim:
           claimName: config-jellyfin
         name: config-jellyfin
-status: {}
+      - name: transcode-cache
+        emptyDir:
+          medium: Memory
+          sizeLimit: 2Gi # Caps the RAM disk at 2GB
