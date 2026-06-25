@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ynab-autosplit
+  name: ynab-autosplit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ynab-autosplit
+  template:
+    metadata:
+      labels:
+        app: ynab-autosplit
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: ynab-autosplit-env-vitor
+        image: ghcr.io/reliccornhusk/ynab-autosplit:0.0.1
+        name: ynab-autosplit

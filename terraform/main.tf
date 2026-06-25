@@ -31,7 +31,7 @@ module "talos" {
       ip            = "10.0.0.241"
       mac_address   = "BC:24:11:6E:40:D6"
       vm_id         = 800
-      cpu           = 4
+      cpu           = 3
       ram_dedicated = 10240
       ram_floating  = 10240
       igpu          = true
