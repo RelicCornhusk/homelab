@@ -5,6 +5,7 @@ metadata:
     app: ynab-autosplit
   name: ynab-autosplit
 spec:
+  concurrencyPolicy: Forbid
   schedule: "*/5 * * * *"
   jobTemplate:
     spec:
@@ -13,7 +14,6 @@ spec:
           labels:
             app: ynab-autosplit
         spec:
-          concurrencyPolicy: Forbid
           restartPolicy: OnFailure
           containers:
           - name: ynab-autosplit-vitor
