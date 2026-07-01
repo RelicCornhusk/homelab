@@ -17,12 +17,12 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: ynab-autosplit-vitor
-            image: ghcr.io/reliccornhusk/ynab-autosplit:1.1.0
+            image: ghcr.io/reliccornhusk/ynab-autosplit:1.2.0
             envFrom:
             - secretRef:
                 name: ynab-autosplit-env-vitor
           - name: ynab-autosplit-thais
-            image: ghcr.io/reliccornhusk/ynab-autosplit:1.1.0
+            image: ghcr.io/reliccornhusk/ynab-autosplit:1.2.0
             envFrom:
             - secretRef:
                 name: ynab-autosplit-env-thais
