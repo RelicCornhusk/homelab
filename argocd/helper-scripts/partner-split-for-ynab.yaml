@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app: partner-split-for-ynab
+  name: partner-split-for-ynab
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "*/3 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: partner-split-for-ynab
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: partner-split-for-ynab-vitor
+            image: ghcr.io/reliccornhusk/partner-split-for-ynab:1.2.0
+            envFrom:
+            - secretRef:
+                name: partner-split-for-ynab-env-vitor
+          - name: partner-split-for-ynab-thais
+            image: ghcr.io/reliccornhusk/partner-split-for-ynab:1.2.0
+            envFrom:
+            - secretRef:
+                name: partner-split-for-ynab-env-thais
+
