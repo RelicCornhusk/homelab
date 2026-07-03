@@ -17,12 +17,12 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: partner-split-for-ynab-vitor
-            image: ghcr.io/reliccornhusk/partner-split-for-ynab:1.2.0
+            image: ghcr.io/reliccornhusk/partner-split-for-ynab:2.0.0
             envFrom:
             - secretRef:
                 name: partner-split-for-ynab-env-vitor
           - name: partner-split-for-ynab-thais
-            image: ghcr.io/reliccornhusk/partner-split-for-ynab:1.2.0
+            image: ghcr.io/reliccornhusk/partner-split-for-ynab:2.0.0
             envFrom:
             - secretRef:
                 name: partner-split-for-ynab-env-thais
