@@ -37,4 +37,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true     # CRITICAL FOR THIS CHART
-      - Replace=true             # Helps with CRD updates
