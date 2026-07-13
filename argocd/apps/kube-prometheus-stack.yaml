@@ -5,28 +5,31 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 87.15.2
-    chart: kube-prometheus-stack
-    helm:
-      values: |
-        grafana:
-          persistence:
-            enabled: true
-            type: pvc
-            size: 5Gi
-        
-        prometheus:
-          prometheusSpec:
-            retention: 15d
-            storageSpec:
-              volumeClaimTemplate:
-                spec:
-                  accessModes: ["ReadWriteOnce"]
-                  resources:
-                    requests:
-                      storage: 20Gi
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      targetRevision: 87.15.2
+      chart: kube-prometheus-stack
+      helm:
+        values: |
+          grafana:
+            persistence:
+              enabled: true
+              type: pvc
+              size: 5Gi
+          
+          prometheus:
+            prometheusSpec:
+              retention: 15d
+              storageSpec:
+                volumeClaimTemplate:
+                  spec:
+                    accessModes: ["ReadWriteOnce"]
+                    resources:
+                      requests:
+                        storage: 20Gi
+    - repoURL: https://github.com/RelicCornhusk/homelab.git
+      targetRevistion: HEAD
+      path: argocd/kube-prometheus-stack
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
