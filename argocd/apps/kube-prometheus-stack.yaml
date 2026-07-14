@@ -11,12 +11,20 @@ spec:
       chart: kube-prometheus-stack
       helm:
         values: |
+          # Disable scraping for components that don't expose default metrics in your K8s distro
+          kubeControllerManager:
+            enabled: false
+          kubeScheduler:
+            enabled: false
+          kubeProxy:
+            enabled: false
+
           grafana:
             persistence:
               enabled: true
               type: pvc
               size: 5Gi
-          
+            
           prometheus:
             prometheusSpec:
               retention: 15d
@@ -27,6 +35,11 @@ spec:
                     resources:
                       requests:
                         storage: 20Gi
+
+          alertmanager:
+            tplConfig: false
+            alertmanagerSpec:
+              configSecret: "custom-alertmanager-config"
     - repoURL: https://github.com/RelicCornhusk/homelab.git
       targetRevistion: HEAD
       path: argocd/kube-prometheus-stack
@@ -39,7 +52,7 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true     # CRITICAL FOR THIS CHART
+      - ServerSideApply=true
     managedNamespaceMetadata:
       labels:
         pod-security.kubernetes.io/enforce: privileged
