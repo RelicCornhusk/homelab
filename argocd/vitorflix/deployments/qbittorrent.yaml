@@ -101,6 +101,7 @@ spec:
           name: config-qbittorrent
         - mountPath: /data
           name: data
+      
 
       # No longer needed if using custom VPN_PORT_FORWARDING_UP_COMMAND
       # - name: qbittorrent-port-manager
@@ -188,6 +189,29 @@ spec:
       #       - CAP_MKNOD
       #       - CAP_NET_RAW
       #       - CAP_AUDIT_WRITE
+      - name: slskd
+        env:
+        - name: SLSKD_REMOTE_CONFIGURATION
+          value: "true"
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        image: ghcr.io/slskd/slskd:0.25.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5030
+        securityContext:
+          capabilities:
+            drop:
+            - CAP_MKNOD
+            - CAP_NET_RAW
+            - CAP_AUDIT_WRITE
+        volumeMounts:
+        - mountPath: /app
+          name: config-slskd
+        - mountPath: /data
+          name: data      
       volumes:
       - persistentVolumeClaim:
           claimName: data
@@ -201,4 +225,7 @@ spec:
       - persistentVolumeClaim:
           claimName: config-gluetun
         name: config-gluetun
+      - persistentVolumeClaim:
+          claimName: config-slskd
+        name: config-slskd
       

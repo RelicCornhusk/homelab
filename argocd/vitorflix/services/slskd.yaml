@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: slskd
+  name: slskd
+  namespace: vitorflix
+spec:
+  ports:
+  - port: 5030
+    protocol: TCP
+    targetPort: 5030
+  selector:
+    app: qbittorrent
+  type: ClusterIP
