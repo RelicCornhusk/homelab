@@ -28,6 +28,7 @@ spec:
         args:
         - |
           mkdir -p /data/media/music &&
+          chown -R "${PUID:-1000}:${PGID:-1000}" /data/media/music &&
           exec /init
         volumeMounts:
         - mountPath: /data
