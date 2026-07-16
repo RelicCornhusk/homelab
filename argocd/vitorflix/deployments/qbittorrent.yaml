@@ -197,6 +197,8 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
+        - name: SLSKD_SHARED_DIR
+          value: "/data"
         image: ghcr.io/slskd/slskd:0.25.1
         imagePullPolicy: Always
         ports:
