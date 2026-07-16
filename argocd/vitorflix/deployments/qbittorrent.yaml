@@ -26,7 +26,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: FIREWALL_INPUT_PORTS
-          value: "8080"
+          value: "8080,5030,5031,50300" # qbittorrent and slskd
         - name: DOT
           value: "off"
         # - name: FIREWALL_DEBUG
