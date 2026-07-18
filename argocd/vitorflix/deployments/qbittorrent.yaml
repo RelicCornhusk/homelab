@@ -195,7 +195,7 @@ spec:
       - name: slskd
         envFrom:
         - secretRef:
-            name: soulseek-credentials
+            name: slskd-secret-env
         env:
         - name: SLSKD_REMOTE_CONFIGURATION
           value: "true"
