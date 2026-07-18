@@ -68,18 +68,6 @@ spec:
             secretKeyRef:
               name: protonvpn-wireguard
               key: private-key
-        # - name: SERVER_COUNTRIES
-        #   value: canada
-        # - name: OPENVPN_USER
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: openvpn-auth
-        #       key: openvpn-user 
-        # - name: OPENVPN_PASSWORD
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: openvpn-auth
-        #       key: openvpn-password
         lifecycle:
           postStart:
             exec:
