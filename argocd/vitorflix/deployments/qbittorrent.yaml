@@ -190,7 +190,7 @@ spec:
       #       - CAP_NET_RAW
       #       - CAP_AUDIT_WRITE
       - name: slskd
-        envfrom:
+        envFrom:
         - secretRef:
             name: soulseek-credentials
         env:
