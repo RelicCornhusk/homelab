@@ -24,6 +24,9 @@ spec:
       - name: gluetun
         image: docker.io/qmcgaw/gluetun:v3
         imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: gluetun-secret-env
         env:
         - name: FIREWALL_INPUT_PORTS
           value: "8080,5030,5031,50300" # qbittorrent and slskd
@@ -200,8 +203,6 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        - name: SLSKD_SHARED_DIR
-          value: "/data"
         image: ghcr.io/slskd/slskd:0.25.1
         imagePullPolicy: Always
         ports:
@@ -214,10 +215,15 @@ spec:
             - CAP_AUDIT_WRITE
         volumeMounts:
         - mountPath: /app
+          name: slskd-configmap 
+        - mountPath: /app
           name: config-slskd
         - mountPath: /data
           name: data      
       volumes:
+      - configMap:
+          name: slskd-configmap
+        name: slskd-configmap
       - persistentVolumeClaim:
           claimName: data
         name: data

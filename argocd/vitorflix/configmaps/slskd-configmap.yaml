@@ -1,0 +1,21 @@
+apiVersion: v1
+metadata:
+  name: slskd-configmap
+  namespace: vitorflix
+data: 
+  slskd.yml: |
+    integration:
+      vpn:
+        enabled: true
+        port_forwarding: true
+        polling_interval: 2500
+        gluetun:
+          url: http://localhost:8000
+          timeout: 1000
+    directories:
+      incomplete: '/data/slskd/incomplete'
+      downloads: '/data/slskd'
+    remote_file_management: true
+    shares:
+      directories:
+        - '/data/media/music'
