@@ -20,6 +20,23 @@ spec:
       securityContext:
         seccompProfile:
           type: Unconfined
+      initContainers:
+      - name: init-slskd-dirs
+        image: busybox:1.36
+        command: ["/bin/sh", "-c"]
+        # This can include /data/torrents as well if I ever have to rebuild my stack
+        args:
+        - |
+          mkdir -p /data/slskd/incomplete &&
+          chown -R "${PUID:-1000}:${PGID:-1000}" /data/slskd
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        volumeMounts:
+        - mountPath: /data
+          name: data
       containers:
       - name: gluetun
         image: docker.io/qmcgaw/gluetun:v3
