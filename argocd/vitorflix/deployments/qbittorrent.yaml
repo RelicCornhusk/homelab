@@ -199,6 +199,8 @@ spec:
         env:
         - name: SLSKD_REMOTE_CONFIGURATION
           value: "true"
+        - name: SLSKD_CONFIG
+          value: "/config/slskd.yml"
         - name: PUID
           value: "1000"
         - name: PGID
@@ -214,7 +216,7 @@ spec:
             - CAP_NET_RAW
             - CAP_AUDIT_WRITE
         volumeMounts:
-        - mountPath: /app
+        - mountPath: /config
           name: slskd-configmap 
         - mountPath: /app
           name: config-slskd
