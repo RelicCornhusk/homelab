@@ -20,6 +20,8 @@ spec:
         name: lidarr
         resources: {}
         env:
+        - name: DOCKER_MODS
+          value: linuxserver/mods:lidarr-flac2mp3
         - name: PGID
           value: "1000"
         - name: PUID
