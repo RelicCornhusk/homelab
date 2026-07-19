@@ -18,9 +18,12 @@ spec:
       containers:
       - image: ghcr.io/navidrome/navidrome:0.63.2
         name: navidrome
-        securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
+        envFrom:
+        - secretRef:
+            name: navidrome-secret-env
+        # securityContext:
+        #   runAsUser: 1000
+        #   runAsGroup: 1000
         volumeMounts:
         - mountPath: /music
           name: data
