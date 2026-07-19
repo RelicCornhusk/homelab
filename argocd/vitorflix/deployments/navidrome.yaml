@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: navidrome
+  name: navidrome
+  namespace: vitorflix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: navidrome
+  template:
+    metadata:
+      labels:
+        app: navidrome
+    spec:
+      containers:
+      - image: ghcr.io/navidrome/navidrome:0.63.2
+        name: navidrome
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+        volumeMounts:
+        - mountPath: /music
+          name: data
+        - mountPath: /data
+          name: config-navidrome
+        ports:
+        - containerPort: 4533
+      volumes:
+      - persistentVolumeClaim:
+          claimName: data
+        name: data
+      - persistentVolumeClaim:
+          claimName: config-navidrome
+        name: config-navidrome
