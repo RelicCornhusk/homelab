@@ -1,4 +1,0 @@
-tlsStore:
-  default:
-    defaultCertificate:
-      secretName: wildcard-vitorflix-tls
