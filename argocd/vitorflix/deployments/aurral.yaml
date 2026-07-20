@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: aurral
+  name: aurral
+  namespace: vitorflix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aurral
+  template:
+    metadata:
+      labels:
+        app: aurral
+    spec:
+      containers:
+      - image: ghcr.io/lklynet/aurral:latest
+        name: aurral
+        env:
+        - name: DL_FOLDER
+          value: "/data/downloads"
+        volumeMounts:
+        - mountPath: /data
+          name: data
+        - mountPath: /app/backend/data
+          name: config-aurral
+        ports:
+        - containerPort: 3001
+      volumes:
+      - persistentVolumeClaim:
+          claimName: data
+        name: data
+      - persistentVolumeClaim:
+          claimName: config-aurral
+        name: config-aurral

@@ -21,9 +21,9 @@ spec:
         envFrom:
         - secretRef:
             name: navidrome-secret-env
-        # securityContext:
-        #   runAsUser: 1000
-        #   runAsGroup: 1000
+        env:
+        - name: ND_MUSICFOLDER
+          value: "/music/media/music"
         volumeMounts:
         - mountPath: /music
           name: data

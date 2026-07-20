@@ -28,7 +28,7 @@ spec:
         args:
         - |
           mkdir -p /data/slskd/incomplete /data/torrents/Music &&
-          chown -R "${PUID:-1000}:${PGID:-1000}" /data/slskd
+          chown -R "${PUID:-1000}:${PGID:-1000}" /data/slskd /data/torrents/Music
         env:
         - name: PUID
           value: "1000"
