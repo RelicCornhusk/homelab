@@ -20,3 +20,5 @@ data:
     shares:
       directories:
         - '/data/media/music'
+        - '/data/media/movies'
+        - '/data/media/tv'
