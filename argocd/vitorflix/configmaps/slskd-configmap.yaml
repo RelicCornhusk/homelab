@@ -16,6 +16,9 @@ data:
     directories:
       incomplete: '/data/slskd/incomplete'
       downloads: '/data/slskd'
+    transfers:
+      upload:
+        speed_limit: 610 # in kibibytes (equals 5Mb)
     remote_file_management: true
     shares:
       directories:
