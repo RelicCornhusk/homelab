@@ -34,6 +34,9 @@ spec:
       containers:
       - image: ghcr.io/lklynet/aurral:latest
         name: aurral
+        envFrom:
+        - secretRef:
+            name: aurral-secret-env
         env:
         - name: DOWNLOAD_FOLDER
           value: "/data/downloads/aurral"
