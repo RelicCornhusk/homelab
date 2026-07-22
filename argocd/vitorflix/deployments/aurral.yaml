@@ -15,12 +15,28 @@ spec:
       labels:
         app: aurral
     spec:
+      initContainers:
+      - name: init-aurral-dirs
+        image: busybox:1.36
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          mkdir -p /data/downloads/aurral &&
+          chown -R "${PUID:-1000}:${PGID:-1000}" /data/downloads/aurral
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        volumeMounts:
+        - mountPath: /data
+          name: data
       containers:
       - image: ghcr.io/lklynet/aurral:latest
         name: aurral
         env:
-        - name: DL_FOLDER
-          value: "/data/downloads"
+        - name: DOWNLOAD_FOLDER
+          value: "/data/downloads/aurral"
         volumeMounts:
         - mountPath: /data
           name: data

@@ -27,7 +27,7 @@ spec:
         # This can include /data/torrents as well if I ever have to rebuild my stack
         args:
         - |
-          mkdir -p /data/slskd/incomplete /data/torrents/Music &&
+          mkdir -p /data/slskd/incomplete /data/torrents/Music /data/downloads/aurral &&
           chown -R "${PUID:-1000}:${PGID:-1000}" /data/slskd /data/torrents/Music
         env:
         - name: PUID
