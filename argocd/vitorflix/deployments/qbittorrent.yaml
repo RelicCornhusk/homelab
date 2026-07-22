@@ -210,7 +210,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: ghcr.io/slskd/slskd:0.25.1
+        image: ghcr.io/slskd/slskd:0.26.0
         imagePullPolicy: Always
         ports:
         - containerPort: 5030
