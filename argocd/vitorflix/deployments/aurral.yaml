@@ -38,6 +38,10 @@ spec:
         - secretRef:
             name: aurral-secret-env
         env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
         - name: DOWNLOAD_FOLDER
           value: "/data/downloads/aurral"
         volumeMounts:
