@@ -22,12 +22,14 @@ spec:
         - secretRef:
             name: navidrome-secret-env
         env:
+        - name: ND_DATAFOLDER
+          value: "/config"
         - name: ND_MUSICFOLDER
-          value: "/music/media/music"
+          value: "/data/media/music"
         volumeMounts:
-        - mountPath: /music
-          name: data
         - mountPath: /data
+          name: data
+        - mountPath: /config
           name: config-navidrome
         ports:
         - containerPort: 4533
