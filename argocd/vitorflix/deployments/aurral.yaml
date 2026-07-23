@@ -32,7 +32,7 @@ spec:
         - mountPath: /data
           name: data
       containers:
-      - image: ghcr.io/lklynet/aurral:latest
+      - image: ghcr.io/lklynet/aurral:test
         name: aurral
         envFrom:
         - secretRef:
@@ -43,7 +43,7 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: data
-        - mountPath: /app/backend/data
+        - mountPath: /config
           name: config-aurral
         ports:
         - containerPort: 3001
