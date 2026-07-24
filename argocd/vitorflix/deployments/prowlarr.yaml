@@ -7,9 +7,6 @@ metadata:
   name: prowlarr
   namespace: vitorflix
 spec:
-  resources:
-    requests: { memory: 224Mi, cpu: 50m }
-    limits:   { memory: 320Mi, cpu: 500m }
   replicas: 1
   selector:
     matchLabels:
@@ -25,7 +22,9 @@ spec:
       - image: lscr.io/linuxserver/prowlarr:2.1.5
         imagePullPolicy: Always
         name: prowlarr
-        resources: {}
+        resources:
+          requests: { memory: 224Mi, cpu: 50m }
+          limits:   { memory: 320Mi, cpu: 500m }
         ports:
         - containerPort: 9696
         volumeMounts:

@@ -6,13 +6,6 @@ metadata:
   name: home-assistant
 spec:
   replicas: 1
-  resources:
-    requests:
-      memory: 128Mi
-      cpu: 50m
-    limits:
-      memory: 256Mi
-      cpu: 250m
   selector:
     matchLabels:
       app: home-assistant
@@ -28,6 +21,13 @@ spec:
           value: America/Toronto
         image: ghcr.io/home-assistant/home-assistant:stable
         name: home-assistant
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 50m
+          limits:
+            memory: 256Mi
+            cpu: 250m
         securityContext:
           privileged: true
         volumeMounts:

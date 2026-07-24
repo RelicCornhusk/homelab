@@ -8,9 +8,6 @@ metadata:
   namespace: vitorflix
 spec:
   replicas: 1
-  resources:
-    requests: { memory: 224Mi, cpu: 50m }
-    limits:   { memory: 320Mi, cpu: 500m }
   selector:
     matchLabels:
       app: bazarr
@@ -24,7 +21,9 @@ spec:
       containers:
       - image: ghcr.io/linuxserver/bazarr:1.5.5
         name: bazarr
-        resources: {}
+        resources:
+          requests: { memory: 224Mi, cpu: 50m }
+          limits:   { memory: 320Mi, cpu: 500m }
         env:
         - name: PGID
           value: "1000"

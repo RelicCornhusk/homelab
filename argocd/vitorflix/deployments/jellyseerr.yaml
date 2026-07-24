@@ -6,9 +6,6 @@ metadata:
   name: jellyseerr
   namespace: vitorflix
 spec:
-  resources:
-    requests: { memory: 256Mi, cpu: 100m }
-    limits:   { memory: 384Mi, cpu: 500m }
   replicas: 1
   selector:
     matchLabels:
@@ -20,6 +17,9 @@ spec:
     spec:
       containers:
       - image: fallenbagel/jellyseerr:2.7.3
+        resources:
+          requests: { memory: 256Mi, cpu: 100m }
+          limits:   { memory: 384Mi, cpu: 500m }
         name: jellyseerr
         env:
         - name: LOG_LEVEL
