@@ -22,6 +22,8 @@ spec:
         - secretRef:
             name: navidrome-secret-env
         env:
+        - name: ND_SCANNER_PURGEMISSING
+          value: always
         - name: ND_DATAFOLDER
           value: "/config"
         - name: ND_MUSICFOLDER
