@@ -7,6 +7,9 @@ metadata:
   name: prowlarr
   namespace: vitorflix
 spec:
+  resources:
+    requests: { memory: 224Mi, cpu: 50m }
+    limits:   { memory: 320Mi, cpu: 500m }
   replicas: 1
   selector:
     matchLabels:

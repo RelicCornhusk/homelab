@@ -7,6 +7,9 @@ metadata:
   name: radarr
   namespace: vitorflix
 spec:
+  resources:
+    requests: { memory: 192Mi, cpu: 50m }
+    limits:   { memory: 288Mi, cpu: 500m }
   replicas: 1
   selector:
     matchLabels:

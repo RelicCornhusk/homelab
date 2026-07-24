@@ -44,6 +44,9 @@ spec:
         envFrom:
         - secretRef:
             name: gluetun-secret-env
+        resources:
+          requests: { memory: 48Mi, cpu: 50m }
+          limits:   { memory: 96Mi, cpu: 250m }
         env:
         - name: FIREWALL_INPUT_PORTS
           value: "8080,5030,5031,50300" # qbittorrent and slskd
@@ -74,7 +77,6 @@ spec:
           postStart:
             exec:
               command: ["/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true"]
-        resources: {}
         securityContext:
           privileged: true
         volumeMounts:
@@ -92,7 +94,9 @@ spec:
           value: "1000"
         image: lscr.io/linuxserver/qbittorrent:5.1.2 ## using this version for qbit_manage compatibility
         imagePullPolicy: Always
-        resources: {}
+        resources:
+          requests: { memory: 256Mi, cpu: 200m }
+          limits:   { memory: 1792Mi, cpu: 1500m }   # headroom for disk cache (lower app setting to ~1536Mi)
         command: ["sh", "-c"]
         args:
         - |
@@ -133,6 +137,9 @@ spec:
       - name: qbitmanage
         image: ghcr.io/stuffanthings/qbit_manage:v4.6.4
         imagePullPolicy: Always
+        resources:
+          requests: { memory: 96Mi, cpu: 50m }
+          limits:   { memory: 192Mi, cpu: 500m }
         env:
         - name: QBT_TAG_UPDATE
           value: "false"
@@ -200,6 +207,9 @@ spec:
       #       - CAP_NET_RAW
       #       - CAP_AUDIT_WRITE
       - name: slskd
+        resources:
+          requests: { memory: 256Mi, cpu: 100m }
+          limits:   { memory: 512Mi, cpu: 500m }
         envFrom:
         - secretRef:
             name: slskd-secret-env

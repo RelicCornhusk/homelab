@@ -6,6 +6,13 @@ metadata:
   name: aurral
   namespace: vitorflix
 spec:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 100m
+    limits:
+      memory: 896Mi   # covers the spike bursts you saw, without over-reserving for steady state
+      cpu: 750m
   replicas: 1
   selector:
     matchLabels:
