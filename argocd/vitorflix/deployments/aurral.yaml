@@ -32,7 +32,7 @@ spec:
         - mountPath: /data
           name: data
       containers:
-      - image: ghcr.io/lklynet/aurral:test
+      - image: ghcr.io/lklynet/aurral:latest
         name: aurral
         resources:
           requests:
@@ -41,9 +41,6 @@ spec:
           limits:
             memory: 896Mi   # covers the spike bursts you saw, without over-reserving for steady state
             cpu: 750m
-        envFrom:
-        - secretRef:
-            name: aurral-secret-env
         env:
         - name: PUID
           value: "1000"
