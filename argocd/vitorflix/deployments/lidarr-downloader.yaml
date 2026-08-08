@@ -1,65 +1,65 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: lidarr-downloader
-  name: lidarr-downloader
-  namespace: vitorflix
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: lidarr-downloader
-  template:
-    metadata:
-      labels:
-        app: lidarr-downloader
-    spec:
-      initContainers:
-      - name: init-lidarr-downloader-dir
-        image: busybox:1.36
-        command: ["/bin/sh", "-c"]
-        args:
-        - |
-          mkdir -p /data/downloads/lidarr-downloader &&
-          chown -R "${PUID:-1000}:${PGID:-1000}" /data/downloads/lidarr-downloader
-        env:
-        - name: PUID
-          value: "1000"
-        - name: PGID
-          value: "1000"
-        volumeMounts:
-        - mountPath: /data
-          name: data
-      containers:
-      - image: docker.io/angrido/lidarr-downloader:latest
-        name: lidarr-downloader
-        resources:
-          requests: { memory: 224Mi, cpu: 50m }
-          limits:   { memory: 500Mi, cpu: 500m }
-        envFrom:
-        - secretRef:
-            name: lidarr-downloader-secret-env
-        env:
-        - name: PUID
-          value: "1000"
-        - name: PGID
-          value: "1000"
-        - name: LIDARR_URL
-          value: "http://lidarr:8686"
-        - name: DOWNLOAD_PATH
-          value: "/data/downloads/lidarr-downloader"
-        - name: LIDARR_PATH
-          value: "/data/media/music"
-        volumeMounts:
-        - mountPath: /data
-          name: data
-        - mountPath: /config
-          name: config-lidarr-downloader
-      volumes:
-      - persistentVolumeClaim:
-          claimName: data
-        name: data
-      - persistentVolumeClaim:
-          claimName: config-lidarr-downloader
-        name: config-lidarr-downloader
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app: lidarr-downloader
+#   name: lidarr-downloader
+#   namespace: vitorflix
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: lidarr-downloader
+#   template:
+#     metadata:
+#       labels:
+#         app: lidarr-downloader
+#     spec:
+#       initContainers:
+#       - name: init-lidarr-downloader-dir
+#         image: busybox:1.36
+#         command: ["/bin/sh", "-c"]
+#         args:
+#         - |
+#           mkdir -p /data/downloads/lidarr-downloader &&
+#           chown -R "${PUID:-1000}:${PGID:-1000}" /data/downloads/lidarr-downloader
+#         env:
+#         - name: PUID
+#           value: "1000"
+#         - name: PGID
+#           value: "1000"
+#         volumeMounts:
+#         - mountPath: /data
+#           name: data
+#       containers:
+#       - image: docker.io/angrido/lidarr-downloader:latest
+#         name: lidarr-downloader
+#         resources:
+#           requests: { memory: 224Mi, cpu: 50m }
+#           limits:   { memory: 500Mi, cpu: 500m }
+#         envFrom:
+#         - secretRef:
+#             name: lidarr-downloader-secret-env
+#         env:
+#         - name: PUID
+#           value: "1000"
+#         - name: PGID
+#           value: "1000"
+#         - name: LIDARR_URL
+#           value: "http://lidarr:8686"
+#         - name: DOWNLOAD_PATH
+#           value: "/data/downloads/lidarr-downloader"
+#         - name: LIDARR_PATH
+#           value: "/data/media/music"
+#         volumeMounts:
+#         - mountPath: /data
+#           name: data
+#         - mountPath: /config
+#           name: config-lidarr-downloader
+#       volumes:
+#       - persistentVolumeClaim:
+#           claimName: data
+#         name: data
+#       - persistentVolumeClaim:
+#           claimName: config-lidarr-downloader
+#         name: config-lidarr-downloader
