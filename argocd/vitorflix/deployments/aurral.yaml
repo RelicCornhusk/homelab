@@ -36,10 +36,10 @@ spec:
         name: aurral
         resources:
           requests:
-            memory: 256Mi
+            memory: 70Mi
             cpu: 100m
           limits:
-            memory: 896Mi   # covers the spike bursts you saw, without over-reserving for steady state
+            memory: 150Mi
             cpu: 750m
         env:
         - name: PUID
