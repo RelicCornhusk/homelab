@@ -3,8 +3,8 @@ kind: Service
 metadata:
   namespace: vitorflix
   labels:
-    app: jellyseerr
-  name: jellyseerr
+    app: seerr
+  name: seerr
 spec:
   ports:
   - name: 5055-5055
@@ -12,5 +12,5 @@ spec:
     protocol: TCP
     targetPort: 5055 
   selector:
-    app: jellyseerr
+    app: seerr
   type: ClusterIP

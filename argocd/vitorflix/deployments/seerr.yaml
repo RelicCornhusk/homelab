@@ -2,25 +2,29 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: jellyseerr
-  name: jellyseerr
+    app: seerr
+  name: seerr
   namespace: vitorflix
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jellyseerr
+      app: seerr
   template:
     metadata:
       labels:
-        app: jellyseerr
+        app: seerr
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
-      - image: fallenbagel/jellyseerr:2.7.3
+      - image: ghcr.io/seerr-team/seerr:v3
         resources:
           requests: { memory: 256Mi, cpu: 100m }
           limits:   { memory: 384Mi, cpu: 500m }
-        name: jellyseerr
+        name: seerr
         env:
         - name: LOG_LEVEL
           value: debug
@@ -28,11 +32,11 @@ spec:
           value: America/Toronto
         volumeMounts:
         - mountPath: /app/config
-          name: config-jellyseerr
+          name: config-seerr
         ports:
         - containerPort: 5055
       volumes:
       - persistentVolumeClaim:
-          claimName: config-jellyseerr
-        name: config-jellyseerr
+          claimName: config-seerr
+        name: config-seerr
  
