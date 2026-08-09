@@ -48,6 +48,8 @@ spec:
           value: "1000"
         - name: DOWNLOAD_FOLDER
           value: "/data/downloads/aurral"
+        - name: LIDARR_ALLOW_HTTP
+          value: "true"
         volumeMounts:
         - mountPath: /data
           name: data
