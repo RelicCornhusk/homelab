@@ -1,79 +1,79 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: data-transfer
-  name: data-transfer
-  namespace: vitorflix
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: data-transfer
-  template:
-    metadata:
-      labels:
-        app: data-transfer
-    spec:
-      containers:
-      - image: bitnami/minideb
-        name: data-transfer
-        command: ["/bin/sh"]
-        args: ["-c", "apt update && apt install -y openssh-client vim && sleep infinity"]
-        volumeMounts:
-        - mountPath: /config-bazarr
-          name: config-bazarr
-        - mountPath: /config-prowlarr
-          name: config-prowlarr
-        - mountPath: /config-radarr
-          name: config-radarr
-        - mountPath: /config-sonarr
-          name: config-sonarr
-        - mountPath: /config-jellyseerr
-          name: config-jellyseerr
-        - mountPath: /config-jellyfin
-          name: config-jellyfin
-        - mountPath: /config-recyclarr
-          name: config-recyclarr
-        - mountPath: /config-qbittorrent
-          name: config-qbittorrent
-        - mountPath: /config-qbitmanage
-          name: config-qbitmanage
-        - mountPath: /config-gluetun
-          name: config-gluetun
-        - mountPath: /data
-          name: data
-      volumes:
-      - persistentVolumeClaim:
-          claimName: data
-        name: data
-      - persistentVolumeClaim:
-          claimName: config-bazarr
-        name: config-bazarr
-      - persistentVolumeClaim:
-          claimName: config-prowlarr
-        name: config-prowlarr
-      - persistentVolumeClaim:
-          claimName: config-radarr
-        name: config-radarr
-      - persistentVolumeClaim:
-          claimName: config-sonarr
-        name: config-sonarr
-      - persistentVolumeClaim:
-          claimName: config-jellyseerr
-        name: config-jellyseerr
-      - persistentVolumeClaim:
-          claimName: config-jellyfin
-        name: config-jellyfin
-      - persistentVolumeClaim:
-          claimName: config-recyclarr
-        name: config-recyclarr
-      - persistentVolumeClaim:
-          claimName: config-qbittorrent
-        name: config-qbittorrent
-      - persistentVolumeClaim:
-          claimName: config-qbitmanage
-        name: config-qbitmanage
-      - persistentVolumeClaim:
-          claimName: config-gluetun
-        name: config-gluetun
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app: data-transfer
+#   name: data-transfer
+#   namespace: vitorflix
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: data-transfer
+#   template:
+#     metadata:
+#       labels:
+#         app: data-transfer
+#     spec:
+#       containers:
+#       - image: bitnami/minideb
+#         name: data-transfer
+#         command: ["/bin/sh"]
+#         args: ["-c", "apt update && apt install -y openssh-client vim && sleep infinity"]
+#         volumeMounts:
+#         - mountPath: /config-bazarr
+#           name: config-bazarr
+#         - mountPath: /config-prowlarr
+#           name: config-prowlarr
+#         - mountPath: /config-radarr
+#           name: config-radarr
+#         - mountPath: /config-sonarr
+#           name: config-sonarr
+#         - mountPath: /config-jellyseerr
+#           name: config-jellyseerr
+#         - mountPath: /config-jellyfin
+#           name: config-jellyfin
+#         - mountPath: /config-recyclarr
+#           name: config-recyclarr
+#         - mountPath: /config-qbittorrent
+#           name: config-qbittorrent
+#         - mountPath: /config-qbitmanage
+#           name: config-qbitmanage
+#         - mountPath: /config-gluetun
+#           name: config-gluetun
+#         - mountPath: /data
+#           name: data
+#       volumes:
+#       - persistentVolumeClaim:
+#           claimName: data
+#         name: data
+#       - persistentVolumeClaim:
+#           claimName: config-bazarr
+#         name: config-bazarr
+#       - persistentVolumeClaim:
+#           claimName: config-prowlarr
+#         name: config-prowlarr
+#       - persistentVolumeClaim:
+#           claimName: config-radarr
+#         name: config-radarr
+#       - persistentVolumeClaim:
+#           claimName: config-sonarr
+#         name: config-sonarr
+#       - persistentVolumeClaim:
+#           claimName: config-jellyseerr
+#         name: config-jellyseerr
+#       - persistentVolumeClaim:
+#           claimName: config-jellyfin
+#         name: config-jellyfin
+#       - persistentVolumeClaim:
+#           claimName: config-recyclarr
+#         name: config-recyclarr
+#       - persistentVolumeClaim:
+#           claimName: config-qbittorrent
+#         name: config-qbittorrent
+#       - persistentVolumeClaim:
+#           claimName: config-qbitmanage
+#         name: config-qbitmanage
+#       - persistentVolumeClaim:
+#           claimName: config-gluetun
+#         name: config-gluetun
