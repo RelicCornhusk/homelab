@@ -18,7 +18,7 @@ data:
       downloads: '/data/slskd'
     transfers:
       upload:
-        speed_limit: 610 # in kibibytes (equals 5Mb)
+        speed_limit: 1200 # in kibibytes (equals 10Mb)
     remote_file_management: true
     shares:
       directories:
