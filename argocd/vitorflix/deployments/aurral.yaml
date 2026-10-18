@@ -36,10 +36,10 @@ spec:
         name: aurral
         resources:
           requests:
-            memory: 70Mi
+            memory: 150Mi
             cpu: 100m
           limits:
-            memory: 150Mi
+            memory: 300Mi
             cpu: 750m
         env:
         - name: PUID
