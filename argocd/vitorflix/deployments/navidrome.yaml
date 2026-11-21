@@ -1,44 +1,44 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: navidrome
-  name: navidrome
-  namespace: vitorflix
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: navidrome
-  template:
-    metadata:
-      labels:
-        app: navidrome
-    spec:
-      containers:
-      - image: ghcr.io/navidrome/navidrome:0.63.2
-        name: navidrome
-        envFrom:
-        - secretRef:
-            name: navidrome-secret-env
-        env:
-        - name: ND_SCANNER_PURGEMISSING
-          value: always
-        - name: ND_DATAFOLDER
-          value: "/config"
-        - name: ND_MUSICFOLDER
-          value: "/data/media/music"
-        volumeMounts:
-        - mountPath: /data
-          name: data
-        - mountPath: /config
-          name: config-navidrome
-        ports:
-        - containerPort: 4533
-      volumes:
-      - persistentVolumeClaim:
-          claimName: data
-        name: data
-      - persistentVolumeClaim:
-          claimName: config-navidrome
-        name: config-navidrome
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app: navidrome
+#   name: navidrome
+#   namespace: vitorflix
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: navidrome
+#   template:
+#     metadata:
+#       labels:
+#         app: navidrome
+#     spec:
+#       containers:
+#       - image: ghcr.io/navidrome/navidrome:0.63.2
+#         name: navidrome
+#         envFrom:
+#         - secretRef:
+#             name: navidrome-secret-env
+#         env:
+#         - name: ND_SCANNER_PURGEMISSING
+#           value: always
+#         - name: ND_DATAFOLDER
+#           value: "/config"
+#         - name: ND_MUSICFOLDER
+#           value: "/data/media/music"
+#         volumeMounts:
+#         - mountPath: /data
+#           name: data
+#         - mountPath: /config
+#           name: config-navidrome
+#         ports:
+#         - containerPort: 4533
+#       volumes:
+#       - persistentVolumeClaim:
+#           claimName: data
+#         name: data
+#       - persistentVolumeClaim:
+#           claimName: config-navidrome
+#         name: config-navidrome

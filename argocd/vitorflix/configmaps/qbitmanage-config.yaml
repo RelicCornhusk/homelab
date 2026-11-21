@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qbitmanage-config
+  namespace: vitorflix
+data:
+  config.yml: |
+    qbt:
+      host: localhost:8080
+      user: null
+      pass: null
+
+    settings:
+      force_auto_tmm: false
+      tracker_error_tag: issue
+      nohardlinks_tag: noHL
+      stalled_tag: stalledDL
+      share_limits_tag: ~share_limit
+      share_limits_min_seeding_time_tag: MinSeedTimeNotReached
+      share_limits_min_num_seeds_tag: MinSeedsNotMet
+      share_limits_last_active_tag: LastActiveLimitNotReached
+      cat_filter_completed: true
+      share_limits_filter_completed: true
+      tag_nohardlinks_filter_completed: true
+      rem_unregistered_filter_completed: false
+      cat_update_all: true
+      disable_qbt_default_share_limits: true
+      tag_stalled_torrents: true
+      rem_unregistered_grace_minutes: 10
+      force_auto_tmm_ignore_tags: []
+      rem_unregistered_ignore_list: []
+    webhooks:
+      error:
+      run_start:
+      run_end:
+      function:
+        tag_tracker_error:
+        share_limits:
+    cat:
+      radarr: /data/torrents/movies
+      sonarr: /data/torrents/tv
+    directory:
+      root_dir: /data/torrents/
+      recycle_bin: /data/torrents/.RecycleBin
+      orphaned_dir: /data/torrents/.Orphaned
+      torrents_dir: /appdata/qbitorrent/qBittorrent/BT_backup
+    commands:
+      recheck: false
+      cat_update: false
+      tag_update: false
+      rem_unregistered: false
+      rem_orphaned: false
+      tag_tracker_error: false
+      tag_nohardlinks: true
+      share_limits: true
+      skip_cleanup: false
+      dry_run: false
+      skip_qb_version_check: false
+    tracker:
+      torrentleech:
+        tag: TorrentLeech
+      other:
+        tag: other
+    share_limits:
+      torrentleech_noHL:
+        priority: 1
+        include_all_tags:
+        - TorrentLeech
+        - noHL
+        max_ratio: 1.0
+        max_seeding_time: 10d
+        cleanup: true
+        share_limit_action: Stop
+        add_group_to_tag: false
+
+      other_noHL:
+        priority: 2
+        include_all_tags:
+        - noHL
+        exclude_tags:
+        - TorrentLeech
+        max_seeding_time: 3d
+        max_ratio: 1.0
+        cleanup: true
+        share_limit_action: Stop
+        add_group_to_tag: false
+    nohardlinks:
+      Movies:
+      TV:
+    recyclebin:
+      enabled: true
+      empty_after_x_days:
+      save_torrents: false
+      split_by_category: false
+    orphaned:
+      empty_after_x_days:
+      exclude_patterns:
+      max_orphaned_files_to_delete: 50
+      min_file_age_minutes: 0
