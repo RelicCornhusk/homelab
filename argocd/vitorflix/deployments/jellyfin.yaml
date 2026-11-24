@@ -18,7 +18,7 @@ spec:
         app: jellyfin
     spec:
       containers:
-      - image: lscr.io/linuxserver/jellyfin:10.11.6
+      - image: lscr.io/linuxserver/jellyfin:latest
         imagePullPolicy: Always
         name: jellyfin
         resources:

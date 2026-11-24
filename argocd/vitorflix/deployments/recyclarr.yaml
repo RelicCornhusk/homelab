@@ -16,7 +16,7 @@ spec:
         app: recyclarr
     spec:
       containers:
-      - image: ghcr.io/recyclarr/recyclarr:7.4.1
+      - image: ghcr.io/recyclarr/recyclarr:8
         name: recyclarr
         volumeMounts:
         - mountPath: /config

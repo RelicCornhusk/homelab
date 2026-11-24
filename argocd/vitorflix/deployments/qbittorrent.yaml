@@ -107,7 +107,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: lscr.io/linuxserver/qbittorrent:5.1.2 ## using this version for qbit_manage compatibility
+        image: lscr.io/linuxserver/qbittorrent:5.3.0 ## using this version for qbit_manage compatibility
         imagePullPolicy: Always
         resources:
           requests: { memory: 256Mi, cpu: 200m }
@@ -245,7 +245,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: ghcr.io/slskd/slskd:0.26.0
+        image: ghcr.io/slskd/slskd:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5030

@@ -19,7 +19,7 @@ spec:
         app: radarr
     spec:
       containers:
-      - image: ghcr.io/linuxserver/radarr:5.26.2
+      - image: ghcr.io/linuxserver/radarr:latest
         name: radarr
         resources:
           requests: { memory: 192Mi, cpu: 50m }

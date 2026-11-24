@@ -20,7 +20,7 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
       containers:
-      - image: ghcr.io/seerr-team/seerr:v3
+      - image: ghcr.io/seerr-team/seerr:latest
         resources:
           requests: { memory: 256Mi, cpu: 100m }
           limits:   { memory: 384Mi, cpu: 500m }

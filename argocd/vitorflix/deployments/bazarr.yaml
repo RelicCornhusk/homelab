@@ -19,7 +19,7 @@ spec:
         app: bazarr
     spec:
       containers:
-      - image: ghcr.io/linuxserver/bazarr:1.5.5
+      - image: ghcr.io/linuxserver/bazarr:latest
         name: bazarr
         resources:
           requests: { memory: 224Mi, cpu: 50m }
